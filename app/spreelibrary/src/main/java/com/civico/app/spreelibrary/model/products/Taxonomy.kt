@@ -1,4 +1,4 @@
-package com.civico.app.spreelibrary.model
+package com.civico.app.spreelibrary.model.products
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -12,6 +12,6 @@ class Taxonomy: Serializable {
     var position = 0
 
     @SerializedName("taxon")
-    var taxon:Taxon? = null
+    var taxon: Taxon? = null
 
 }

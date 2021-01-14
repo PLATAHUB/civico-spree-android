@@ -1,4 +1,4 @@
-package com.civico.app.spreelibrary.model
+package com.civico.app.spreelibrary.model.products
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -30,5 +30,5 @@ class Taxon: Serializable {
     var metaDescription:String = ""
 
     @SerializedName("taxons")
-    var taxons:ArrayList<Taxon> = ArrayList()
+    var taxons:List<Taxon> = ArrayList()
 }

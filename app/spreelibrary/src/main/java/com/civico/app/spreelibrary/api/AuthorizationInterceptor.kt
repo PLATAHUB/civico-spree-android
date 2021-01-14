@@ -1,10 +1,10 @@
-package com.civico.app.spreelibrary.service
+package com.civico.app.spreelibrary.api
 
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 
-class AuthorizationInterceptor (var token:String): Interceptor {
+class AuthorizationInterceptor (private var token:String): Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         var request: Request = chain.request()

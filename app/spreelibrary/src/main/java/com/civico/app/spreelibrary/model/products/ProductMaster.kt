@@ -1,9 +1,12 @@
-package com.civico.app.spreelibrary.model
+package com.civico.app.spreelibrary.model.products
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 class ProductMaster: Serializable {
+
+    @SerializedName("product_id")
+    var productId:Int? = null
 
     @SerializedName("id")
     var id:Int = 0
@@ -42,10 +45,10 @@ class ProductMaster: Serializable {
     var trackInventory:Boolean = false
 
     @SerializedName("option_values")
-    var optionValues:ArrayList<OptionValue> = ArrayList()
+    var optionValues:List<OptionValue> = ArrayList()
 
     @SerializedName("images")
-    var images:ArrayList<Image> = ArrayList()
+    var images:List<Image> = ArrayList()
 
     @SerializedName("display_price")
     var displayPrice:String = ""
@@ -67,5 +70,10 @@ class ProductMaster: Serializable {
 
     @SerializedName("is_destroyed")
     var isDestroyed:Boolean = false
+
+    override fun toString(): String {
+        return "ProductMaster(productId=$productId, id=$id, name='$name', sku='$sku', price='$price', weight='$weight', height='$height', width='$width', depth='$depth', master=$master, slug='$slug', description='$description', trackInventory=$trackInventory, optionValues=$optionValues, images=$images, displayPrice='$displayPrice', optionsText='$optionsText', inStock=$inStock, isBackorderable=$isBackorderable, isOrderable=$isOrderable, totalOnHand=$totalOnHand, isDestroyed=$isDestroyed)"
+    }
+
 
 }

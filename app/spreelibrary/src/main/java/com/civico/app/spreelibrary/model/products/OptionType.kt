@@ -1,4 +1,4 @@
-package com.civico.app.spreelibrary.model
+package com.civico.app.spreelibrary.model.products
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
