@@ -6,100 +6,100 @@ import java.io.Serializable
 class Order : Serializable{
 
     @SerializedName("id")
-    var id:Int = 0
+    var id:Int? = null
 
     @SerializedName("number")
-    var number:String = ""
+    var number:String? = null
 
     @SerializedName("item_total")
-    var itemTotal:String = ""
+    var itemTotal:String? = null
 
     @SerializedName("total")
-    var total:String = ""
+    var total:String? = null
 
     @SerializedName("ship_total")
-    var shipTotal:String = ""
+    var shipTotal:String? = null
 
     @SerializedName("state")
-    var state:String = ""
+    var state:String? = null
 
     @SerializedName("adjustment_total")
-    var adjustmentTotal:String = ""
+    var adjustmentTotal:String? = null
 
     @SerializedName("user_id")
-    var userId:Int = 0
+    var userId:Int? = null
 
     @SerializedName("created_at")
-    var createdAt:String = ""
+    var createdAt:String? = null
 
     @SerializedName("updated_at")
-    var updatedAt:String = ""
+    var updatedAt:String? = null
 
     @SerializedName("completed_at")
-    var completedAt:String = ""
+    var completedAt:String? = null
 
     @SerializedName("payment_total")
-    var paymentTotal:String = ""
+    var paymentTotal:String? = null
 
     @SerializedName("shipment_state")
-    var shipmentState:String = ""
+    var shipmentState:String? = null
 
     @SerializedName("payment_state")
-    var paymentState:String = ""
+    var paymentState:String? = null
 
     @SerializedName("email")
-    var email:String = ""
+    var email:String? = null
 
     @SerializedName("special_instructions")
-    var specialInstructions:String = ""
+    var specialInstructions:String? = null
 
     @SerializedName("channel")
-    var channel:String = ""
+    var channel:String? = null
 
     @SerializedName("included_tax_total")
-    var includedTaxTotal:String = ""
+    var includedTaxTotal:String? = null
 
     @SerializedName("additional_tax_total")
-    var additionalTaxTotal:String = ""
+    var additionalTaxTotal:String? = null
 
     @SerializedName("display_included_tax_total")
-    var displayIncludedTaxTotal:String = ""
+    var displayIncludedTaxTotal:String? = null
 
     @SerializedName("display_additional_tax_total")
-    var displayAdditionalTaxTotal:String = ""
+    var displayAdditionalTaxTotal:String? = null
 
     @SerializedName("tax_total")
-    var taxTotal:String = ""
+    var taxTotal:String? = null
 
     @SerializedName("currency")
-    var currency:String = ""
+    var currency:String? = null
 
     @SerializedName("considered_risky")
-    var consideredRisky:Boolean = false
+    var consideredRisky:Boolean? = null
 
     @SerializedName("canceler_id")
-    var cancelerId:String = ""
+    var cancelerId:String? = null
 
     @SerializedName("display_item_total")
-    var displayItemTotal:String = ""
+    var displayItemTotal:String? = null
 
     @SerializedName("total_quantity")
-    var totalQuantity:Int = 0
+    var totalQuantity:Int? = null
 
     @SerializedName("display_total")
-    var displayTotal:String = ""
+    var displayTotal:String? = null
 
     @SerializedName("display_ship_total")
-    var displayShipTotal:String = ""
+    var displayShipTotal:String? = null
 
     @SerializedName("display_tax_total")
-    var displayTaxTotal:String = ""
+    var displayTaxTotal:String? = null
 
     @SerializedName("display_adjustment_total")
-    var displayAdjustmentTotal:String = ""
+    var displayAdjustmentTotal:String? = null
 
     @SerializedName("token")
-    var token:String = ""
+    var token:String? = null
 
     @SerializedName("checkout_steps")
     var checkoutSteps:List<String> = ArrayList()
