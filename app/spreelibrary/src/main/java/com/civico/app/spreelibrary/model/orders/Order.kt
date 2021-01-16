@@ -3,6 +3,7 @@ package com.civico.app.spreelibrary.model.orders
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+
 class Order : Serializable{
 
     @SerializedName("id")
@@ -127,6 +128,12 @@ class Order : Serializable{
 
     @SerializedName("permissions")
     var permissions:Map<String, Boolean>? = null
+
+    @SerializedName("bill_address_attributes")
+    var billingAddressToBeAdded: Address? = null
+
+    @SerializedName("ship_address_attributes")
+    var shippingAddressToBeAdded: Address? = null
 
     override fun toString(): String {
         return "Order(id=$id, number='$number', itemTotal='$itemTotal', total='$total', shipTotal='$shipTotal', state='$state', adjustmentTotal='$adjustmentTotal', userId=$userId, createdAt='$createdAt', updatedAt='$updatedAt', completedAt='$completedAt', paymentTotal='$paymentTotal', shipmentState='$shipmentState', paymentState='$paymentState', email='$email', specialInstructions='$specialInstructions', channel='$channel', includedTaxTotal='$includedTaxTotal', additionalTaxTotal='$additionalTaxTotal', displayIncludedTaxTotal='$displayIncludedTaxTotal', displayAdditionalTaxTotal='$displayAdditionalTaxTotal', taxTotal='$taxTotal', currency='$currency', consideredRisky=$consideredRisky, cancelerId='$cancelerId', displayItemTotal='$displayItemTotal', totalQuantity=$totalQuantity, displayTotal='$displayTotal', displayShipTotal='$displayShipTotal', displayTaxTotal='$displayTaxTotal', displayAdjustmentTotal='$displayAdjustmentTotal', token='$token', checkoutSteps=$checkoutSteps, billAddress=$billAddress, shipAddress=$shipAddress, lineItems=$lineItems, payments=$payments, shipments=$shipments, adjustments=$adjustments, creditCards=$creditCards, permissions=$permissions)"

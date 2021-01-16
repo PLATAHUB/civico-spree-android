@@ -8,6 +8,6 @@ import java.io.Serializable
 class LineItemWrapper: Serializable {
 
     @SerializedName("line_item")
-    val lineItem: LineItem? = null
+    var lineItem: LineItem? = null
 
 }

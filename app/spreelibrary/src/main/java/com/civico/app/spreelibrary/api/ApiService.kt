@@ -50,10 +50,10 @@ interface ApiService {
     fun addToCart(@Path("orderNumber") orderNumber: String, @Header("X-Spree-Token") userToken: String, @Body lineItemWrapper: LineItemWrapper): Call<Order>
 
     @PUT("checkouts/{orderNumber}/next")
-    fun moveToNextState(@Path("orderNumber") orderId: String, @Header("X-Spree-Token") userToken: String): Call<Order>
+    fun moveToNextState(@Path("orderNumber") orderNumber: String, @Header("X-Spree-Token") userToken: String): Call<Order>
 
     @PUT("checkouts/{orderNumber}")
-    fun moveToConfirmState(@Path("orderNumber") orderId: String, @Header("X-Spree-Token") userToken: String, @Body orderWrapper: OrderWrapper): Call<Order>
+    fun moveToConfirmState(@Path("orderNumber") orderNumber: String, @Header("X-Spree-Token") userToken: String, @Body orderWrapper: OrderWrapper): Call<Order>
 
     /*@POST("checkouts/{orderNumber}/line_items")
     fun addToCart(@Path("orderNumber") orderNumber: String, @Body lineItemWrapper: LineItemWrapper):Call<Order>

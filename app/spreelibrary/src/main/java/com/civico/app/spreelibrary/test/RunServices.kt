@@ -25,7 +25,7 @@ class RunServices {
         }
 
         private fun orderServices(userToken:String){
-            /*OrderServices.getOrder("R118199495", "XD8oN79QOa5pdo9QnYzDww1603224099434", object : DataCallback<Order>{
+            OrderServices.getOrder("R118199495", "XD8oN79QOa5pdo9QnYzDww1603224099434", object : DataCallback<Order>{
                 override fun onResponse(data: Order) {
                     println(data)
                 }
@@ -34,9 +34,9 @@ class RunServices {
                     println(code)
                     println(message)
                 }
-            })*/
+            })
 
-            OrderServices.getOrders(userToken = "11", dataCallback =  object : DataCallback<OrderResponse>{
+            OrderServices.getOrders(userToken = userToken, dataCallback =  object : DataCallback<OrderResponse>{
                 override fun onResponse(data: OrderResponse) {
                     println(data)
                 }
