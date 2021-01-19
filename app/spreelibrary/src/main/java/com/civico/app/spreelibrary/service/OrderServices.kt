@@ -39,6 +39,18 @@ object OrderServices {
         })
     }
 
+    fun getUserOrder(userToken: String, numberOrder: String, dataCallback: DataCallback<Order>){
+        ApiClient.apiService.getUserOrder(numberOrder, userToken).enqueue(object : Callback<Order> {
+            override fun onResponse(call: Call<Order>, response: Response<Order>) {
+                Utils.executeCorrectResponse(response, dataCallback)
+            }
+
+            override fun onFailure(call: Call<Order>, t: Throwable) {
+                Utils.executeFailedResponse(t, dataCallback)
+            }
+        })
+    }
+
     fun createOrder(userToken: String, orderWrapper: OrderWrapper, dataCallback: DataCallback<Order>){
         ApiClient.apiService.createOrder(userToken, orderWrapper).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
@@ -63,8 +75,8 @@ object OrderServices {
         })
     }
 
-    fun editCartProduct(userToken: String, orderNumber: String, idProduct:Int, lineItemWrapper: LineItemWrapper, dataCallback: DataCallback<Order>){
-        ApiClient.apiService.editQuantity(orderNumber, idProduct, userToken, lineItemWrapper).enqueue(object : Callback<Order> {
+    fun editCartProduct(userToken: String, orderNumber: String, idItemLine:Int, lineItemWrapper: LineItemWrapper, dataCallback: DataCallback<Order>){
+        ApiClient.apiService.editCartProduct(orderNumber, idItemLine, userToken, lineItemWrapper).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -75,8 +87,8 @@ object OrderServices {
         })
     }
 
-    fun removeCartProduct(userToken: String, orderNumber: String, idProduct:Int, dataCallback: DataCallback<Order>){
-        ApiClient.apiService.removeProduct(orderNumber, idProduct, userToken).enqueue(object : Callback<Order> {
+    fun removeCartProduct(userToken: String, orderNumber: String, idItemLine:Int, dataCallback: DataCallback<Order>){
+        ApiClient.apiService.removeCartProduct(orderNumber, idItemLine, userToken).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }

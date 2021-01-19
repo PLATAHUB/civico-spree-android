@@ -11,7 +11,7 @@ import retrofit2.Response
  *
  * @author caflorezvi
  */
-object CheckoutService {
+object CheckoutServices {
 
     fun moveToNextState(userToken: String, orderNumber: String, dataCallback: DataCallback<Order>){
         ApiClient.apiService.moveToNextState(orderNumber, userToken).enqueue(object : Callback<Order> {
@@ -25,10 +25,8 @@ object CheckoutService {
         })
     }
 
-    fun moveToConfirmState(userToken: String, orderNumber: String, order: Order, dataCallback: DataCallback<Order>){
-        val orderWrapper = OrderWrapper()
-        orderWrapper.order = order
-        ApiClient.apiService.moveToConfirmState(orderNumber, userToken, orderWrapper).enqueue(object : Callback<Order> {
+    fun addCheckoutAddress(userToken: String, orderNumber: String, orderWrapper: OrderWrapper, dataCallback: DataCallback<Order>){
+        ApiClient.apiService.addCheckoutAddress(orderNumber, userToken, orderWrapper).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
