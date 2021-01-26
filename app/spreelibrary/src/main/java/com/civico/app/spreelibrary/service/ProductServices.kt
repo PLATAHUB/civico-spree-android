@@ -69,4 +69,16 @@ object ProductServices {
         })
     }
 
+    fun getProductImage(userToken:String, productIdOrSlug:String, idImage:Int, dataCallback: DataCallback<Image> ){
+        ApiClient.apiService.getProductImage(userToken, productIdOrSlug, idImage).enqueue(object : Callback<Image> {
+            override fun onResponse(call: Call<Image>, response: Response<Image>) {
+                Utils.executeCorrectResponse(response, dataCallback)
+            }
+
+            override fun onFailure(call: Call<Image>, t: Throwable) {
+                Utils.executeFailedResponse(t, dataCallback)
+            }
+        })
+    }
+
 }

@@ -28,6 +28,9 @@ interface ApiService {
     @GET("products/{productIdOrSlug}/images")
     fun getProductImages(@Header("X-Spree-Token") userToken: String, @Path("productIdOrSlug") productIdOrSlug: String):Call<List<Image>>
 
+    @GET("products/{productIdOrSlug}/images/{idImage}")
+    fun getProductImage(@Header("X-Spree-Token") userToken: String, @Path("productIdOrSlug") productIdOrSlug: String, @Path("idImage") idImage: Int):Call<Image>
+
     @POST("orders")
     fun createOrder(@Header("X-Spree-Token") userToken: String, @Body orderWrapper: OrderWrapper):Call<Order>
 
