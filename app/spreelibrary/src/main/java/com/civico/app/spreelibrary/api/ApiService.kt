@@ -75,9 +75,9 @@ interface ApiService {
     @GET("taxonomies/{TaxonsId}/taxons/{TaxonId}")
     fun getTaxonomie(@Header("X-Spree-Token") userToken: String, @Path("TaxonsId") TaxonsId: Int, @Path("TaxonId") TaxonId: Int):Call<Taxon>
 
-    @PUT("/orders/{orderNumber}/apply_coupon_code")
+    @PUT("orders/{orderNumber}/apply_coupon_code")
     fun applyCouponCode(@Header("X-Spree-Token") userToken: String, @Path("orderNumber") orderNumber: String, @Body coupon: Coupon):Call<CouponResponse>
 
-    @PUT("/orders/{orderNumber}/remove_coupon_code")
+    @PUT("orders/{orderNumber}/remove_coupon_code")
     fun removeCouponCode(@Header("X-Spree-Token") userToken: String, @Path("orderNumber") orderNumber: String, @Body coupon: Coupon):Call<CouponResponse>
 }
