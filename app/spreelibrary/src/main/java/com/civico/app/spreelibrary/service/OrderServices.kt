@@ -1,9 +1,11 @@
 package com.civico.app.spreelibrary.service
 
 import com.civico.app.spreelibrary.api.ApiClient
+import com.civico.app.spreelibrary.api.model.CouponResponse
 import com.civico.app.spreelibrary.api.model.LineItemWrapper
 import com.civico.app.spreelibrary.api.model.OrderResponse
 import com.civico.app.spreelibrary.api.model.OrderWrapper
+import com.civico.app.spreelibrary.model.orders.Coupon
 import com.civico.app.spreelibrary.model.orders.Order
 import retrofit2.Call
 import retrofit2.Callback
@@ -106,6 +108,30 @@ object OrderServices {
             }
 
             override fun onFailure(call: Call<Order>, t: Throwable) {
+                Utils.executeFailedResponse(t, dataCallback)
+            }
+        })
+    }
+
+    fun applyCouponCode(userToken: String, orderNumber: String, coupon: Coupon, dataCallback: DataCallback<CouponResponse>){
+        ApiClient.apiService.applyCouponCode(userToken, orderNumber, coupon).enqueue(object : Callback<CouponResponse> {
+            override fun onResponse(call: Call<CouponResponse>, response: Response<CouponResponse>) {
+                Utils.executeCorrectResponse(response, dataCallback)
+            }
+
+            override fun onFailure(call: Call<CouponResponse>, t: Throwable) {
+                Utils.executeFailedResponse(t, dataCallback)
+            }
+        })
+    }
+
+    fun removeCouponCode(userToken: String, orderNumber: String, coupon: Coupon, dataCallback: DataCallback<CouponResponse>){
+        ApiClient.apiService.removeCouponCode(userToken, orderNumber, coupon).enqueue(object : Callback<CouponResponse> {
+            override fun onResponse(call: Call<CouponResponse>, response: Response<CouponResponse>) {
+                Utils.executeCorrectResponse(response, dataCallback)
+            }
+
+            override fun onFailure(call: Call<CouponResponse>, t: Throwable) {
                 Utils.executeFailedResponse(t, dataCallback)
             }
         })

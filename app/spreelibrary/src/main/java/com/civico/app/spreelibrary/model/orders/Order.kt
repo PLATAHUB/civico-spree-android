@@ -121,7 +121,7 @@ class Order : Serializable{
     var shipments:List<Shipment> = ArrayList()
 
     @SerializedName("adjustments")
-    var adjustments:List<String>? = null
+    var adjustments:List<Adjustment> = ArrayList()
 
     @SerializedName("credit_cards")
     var creditCards:List<String>? = null

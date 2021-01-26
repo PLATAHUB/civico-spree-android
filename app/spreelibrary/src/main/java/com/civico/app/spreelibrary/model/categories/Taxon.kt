@@ -1,11 +1,7 @@
 package com.civico.app.spreelibrary.model.categories
 
-import com.civico.app.spreelibrary.model.products.Taxonomy
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
-
-
-
 
 class Taxon: Serializable{
 

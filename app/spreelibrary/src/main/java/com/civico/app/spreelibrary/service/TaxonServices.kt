@@ -1,9 +1,6 @@
 package com.civico.app.spreelibrary.service
 
 import com.civico.app.spreelibrary.api.ApiClient
-import com.civico.app.spreelibrary.model.products.Image
-import com.civico.app.spreelibrary.model.products.Product
-import com.civico.app.spreelibrary.api.model.ProductResponse
 import com.civico.app.spreelibrary.api.model.TaxonResponse
 import com.civico.app.spreelibrary.model.categories.Taxon
 import retrofit2.Call
@@ -15,9 +12,6 @@ import retrofit2.Response
  * @author @andresad13
  */
 object TaxonServices {
-
-
-
 
     fun getTaxons(userToken:String, taxonId:Int=1, dataCallback: DataCallback<TaxonResponse> ){
         ApiClient.apiService.getTaxonomies(userToken, taxonId).enqueue(object : Callback<TaxonResponse>{
@@ -40,9 +34,5 @@ object TaxonServices {
             }
         })
     }
-
-
-
-
 
 }

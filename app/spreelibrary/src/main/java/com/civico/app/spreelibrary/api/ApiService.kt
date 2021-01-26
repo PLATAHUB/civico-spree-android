@@ -1,9 +1,8 @@
 package com.civico.app.spreelibrary.api
 
-import com.civico.app.spreelibrary.api.model.LineItemWrapper
-import com.civico.app.spreelibrary.api.model.OrderResponse
-import com.civico.app.spreelibrary.api.model.OrderWrapper
-import com.civico.app.spreelibrary.api.model.ProductResponse
+import com.civico.app.spreelibrary.api.model.*
+import com.civico.app.spreelibrary.model.categories.Taxon
+import com.civico.app.spreelibrary.model.orders.Coupon
 import com.civico.app.spreelibrary.model.orders.Order
 import com.civico.app.spreelibrary.model.products.Image
 import com.civico.app.spreelibrary.model.products.Product
@@ -76,5 +75,9 @@ interface ApiService {
     @GET("taxonomies/{TaxonsId}/taxons/{TaxonId}")
     fun getTaxonomie(@Header("X-Spree-Token") userToken: String, @Path("TaxonsId") TaxonsId: Int, @Path("TaxonId") TaxonId: Int):Call<Taxon>
 
+    @PUT("/orders/{orderNumber}/apply_coupon_code")
+    fun applyCouponCode(@Header("X-Spree-Token") userToken: String, @Path("orderNumber") orderNumber: String, @Body coupon: Coupon):Call<CouponResponse>
 
+    @PUT("/orders/{orderNumber}/remove_coupon_code")
+    fun removeCouponCode(@Header("X-Spree-Token") userToken: String, @Path("orderNumber") orderNumber: String, @Body coupon: Coupon):Call<CouponResponse>
 }
