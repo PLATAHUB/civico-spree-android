@@ -67,4 +67,11 @@ interface ApiService {
     @DELETE("checkouts/{orderNumber}/line_items/{idItemLine}")
     fun deleteCartItems(@Path("orderNumber") orderNumber: String, @Path("idItemLine") idItemLine: String):Call<Order>*/
 
+    @GET("taxonomies/{TaxonId}/taxons")
+    fun getTaxonomies(@Header("X-Spree-Token") userToken: String, @Path("TaxonId") TaxonId: Int):Call<TaxonResponse>
+
+    @GET("taxonomies/{TaxonsId}/taxons/{TaxonId}")
+    fun getTaxonomie(@Header("X-Spree-Token") userToken: String, @Path("TaxonsId") TaxonsId: Int, @Path("TaxonId") TaxonId: Int):Call<Taxon>
+
+
 }
