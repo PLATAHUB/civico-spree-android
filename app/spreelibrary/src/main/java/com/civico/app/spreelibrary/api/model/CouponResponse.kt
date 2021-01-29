@@ -17,4 +17,9 @@ class CouponResponse : Serializable {
     @SerializedName("status_code")
     var statusCode:String? = null
 
+    override fun toString(): String {
+        return "CouponResponse(success=$success, error=$error, successful=$successful, statusCode=$statusCode)"
+    }
+
+
 }
