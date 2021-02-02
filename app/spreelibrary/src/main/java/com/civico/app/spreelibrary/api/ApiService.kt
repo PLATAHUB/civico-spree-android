@@ -2,6 +2,7 @@ package com.civico.app.spreelibrary.api
 
 import com.civico.app.spreelibrary.api.model.*
 import com.civico.app.spreelibrary.model.categories.Taxon
+import com.civico.app.spreelibrary.model.delivery.DeliveryInformation
 import com.civico.app.spreelibrary.model.orders.Coupon
 import com.civico.app.spreelibrary.model.orders.Order
 import com.civico.app.spreelibrary.model.products.Image
@@ -80,4 +81,9 @@ interface ApiService {
 
     @PUT("orders/{orderNumber}/remove_coupon_code")
     fun removeCouponCode(@Header("X-Spree-Token") userToken: String, @Path("orderNumber") orderNumber: String, @Body coupon: Coupon):Call<CouponResponse>
+
+    @PUT("business/customers/{id-cliente}/update-delivery-information")
+    fun addDelivery(@Path("id-cliente") idCliente: String,  @Query("auth_token") authToken: String, @Body deliveryInformation: DeliveryInformation):Call<DeliveryInformation>
+
+
 }
