@@ -14,4 +14,7 @@ class DeliveryCompanies : Serializable {
     @SerializedName("coverage_area")
     var coverage_area: String? = null
 
+    @SerializedName("_coverage_area")
+    var _coverage_area: String? = null
+
 }
