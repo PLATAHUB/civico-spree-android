@@ -14,6 +14,9 @@ class DeliveryInformation  : Serializable {
     @SerializedName("enlistment_time")
     var enlistment_time: String? = null
 
+    @SerializedName("_enlistment_time")
+    var _enlistment_time: String? = null
+
     @SerializedName("schedules")
     var schedules: List<DeliverySchedules> = ArrayList()
 
