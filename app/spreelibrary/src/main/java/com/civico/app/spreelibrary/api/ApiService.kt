@@ -2,6 +2,7 @@ package com.civico.app.spreelibrary.api
 
 import com.civico.app.spreelibrary.api.model.*
 import com.civico.app.spreelibrary.model.categories.Taxon
+import com.civico.app.spreelibrary.model.delivery.DeliveryConfiguration
 import com.civico.app.spreelibrary.model.delivery.DeliveryInformation
 import com.civico.app.spreelibrary.model.orders.Coupon
 import com.civico.app.spreelibrary.model.orders.Order
@@ -85,6 +86,6 @@ interface ApiService {
     @PUT("business/customers/{id-cliente}/update-delivery-information")
     fun addDelivery(@Path("id-cliente") idCliente: String,  @Query("auth_token") authToken: String, @Body deliveryInformation: DeliveryInformation):Call<DeliveryInformation>
 
-    @GET("business/customers/{id-cliente}/update-delivery-information")
-    fun getDelivery(@Path("id-cliente") idCliente: String,  @Query("auth_token") authToken: String):Call<DeliveryInformation>
+    @GET("business/customers/{id-cliente}/delivery-information")
+    fun getDelivery(@Path("id-cliente") idCliente: String,  @Query("auth_token") authToken: String):Call<DeliveryConfiguration>
 }
