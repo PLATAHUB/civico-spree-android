@@ -6,13 +6,13 @@ import java.io.Serializable
 class DeliveryInformation  : Serializable {
 
     @SerializedName("has_delivery")
-    var has_delivery: Boolean = false
+    var has_delivery: Boolean? = null
 
     @SerializedName("has_mensajeros_urbanos")
-    var has_mensajeros_urbanos: Boolean = false
+    var has_mensajeros_urbanos: Boolean? = null
 
     @SerializedName("enlistment_time")
-    var enlistment_time: String = ""
+    var enlistment_time: String? = null
 
     @SerializedName("schedules")
     var schedules: List<DeliverySchedules> = ArrayList()

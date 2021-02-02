@@ -12,12 +12,12 @@ class DeliverySchedules : Serializable {
     var end_day: Int? = null
 
     @SerializedName("start_hour")
-    var start_hour: String = ""
+    var start_hour: String? = null
 
     @SerializedName("end_hour")
-    var end_hour: String = ""
+    var end_hour: String? = null
 
     @SerializedName("open_24")
-    var open_24: Boolean = false
+    var open_24: Boolean? = null
 
 }
