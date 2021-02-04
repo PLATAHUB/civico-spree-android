@@ -26,4 +26,7 @@ class DeliveryInformation  : Serializable {
     @SerializedName("preparation_time")
     var preparation_time: Integer ?= null
 
+    @SerializedName("own_delivery")
+    var own_delivery: Boolean ?= null
+
 }
