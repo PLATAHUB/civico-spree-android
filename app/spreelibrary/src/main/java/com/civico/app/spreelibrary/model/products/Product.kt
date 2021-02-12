@@ -41,8 +41,35 @@ class Product: Serializable {
     @SerializedName("total_on_hand")
     var totalOnHand: Int = 0
 
+    @SerializedName("lat")
+    var lat: String? = null
+
+    @SerializedName("lng")
+    var lng: String? = null
+
+    @SerializedName("conditions")
+    var conditions: String = ""
+
+    @SerializedName("offer?")
+    var offer: Boolean = false
+
+    @SerializedName("percentage_discount")
+    var percentageDiscount: Int = 0
+
+    @SerializedName("compare_at_price")
+    var compareAtPrice: String = ""
+
+    @SerializedName("vendor_id")
+    var vendorId: Int = 0
+
+    @SerializedName("vendor_name")
+    var vendorName: String = ""
+
+    @SerializedName("product_url")
+    var productUrl: String = ""
+
     @SerializedName("avg_rating")
-    var avgRating: Int = 0
+    var avgRating: Float = 0F
 
     @SerializedName("reviews_count")
     var reviewsCount: String = ""
@@ -66,8 +93,7 @@ class Product: Serializable {
     var hasVariants:Boolean = false
 
     override fun toString(): String {
-        return "Product(id=$id, name='$name', description='$description', price='$price', displayPrice='$displayPrice', availableOn='$availableOn', slug='$slug', metaDescription='$metaDescription', metaKeywords='$metaKeywords', shippingCategoryId=$shippingCategoryId, taxonIds=$taxonIds, totalOnHand=$totalOnHand, avgRating=$avgRating, reviewsCount='$reviewsCount', master=$master, variants=$variants, optionTypes=$optionTypes, productProperties=$productProperties, classifications=$classifications, hasVariants=$hasVariants)"
+        return "Product(id=$id, name='$name', description='$description', price='$price', displayPrice='$displayPrice', availableOn='$availableOn', slug='$slug', metaDescription='$metaDescription', metaKeywords='$metaKeywords', shippingCategoryId=$shippingCategoryId, taxonIds=$taxonIds, totalOnHand=$totalOnHand, lat=$lat, lng=$lng, conditions='$conditions', offer=$offer, percentageDiscount=$percentageDiscount, compareAtPrice='$compareAtPrice', vendorId=$vendorId, vendorName='$vendorName', productUrl='$productUrl', avgRating=$avgRating, reviewsCount='$reviewsCount', master=$master, variants=$variants, optionTypes=$optionTypes, productProperties=$productProperties, classifications=$classifications, hasVariants=$hasVariants)"
     }
-
 
 }

@@ -14,7 +14,7 @@ import retrofit2.Response
  */
 object ProductServices {
 
-    fun getProducts(userToken:String, page:Int=1, dataCallback: DataCallback<ProductResponse> ){
+    /*fun getProducts(userToken:String, page:Int=1, dataCallback: DataCallback<ProductResponse> ){
         ApiClient.apiService.getProducts(userToken, page).enqueue(object : Callback<ProductResponse>{
             override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
@@ -24,13 +24,27 @@ object ProductServices {
                 Utils.executeFailedResponse(t, dataCallback)
             }
         })
+    }*/
+
+    fun searchProducts(userToken:String, page:Int=1, keywords:String, dataCallback: DataCallback<ProductResponse>){
+
+        ApiClient.apiService.searchProducts(userToken, keywords, page).enqueue(object : Callback<ProductResponse> {
+            override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
+                Utils.executeCorrectResponse(response, dataCallback)
+            }
+
+            override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
+                Utils.executeFailedResponse(t, dataCallback)
+            }
+        })
+
     }
 
-    fun searchProducts(userToken:String, page:Int=1, query:Map<String, String>, dataCallback: DataCallback<ProductResponse>){
+    fun filterProducts(userToken:String, page:Int=1, keywords:String, filters:Map<String, String>, dataCallback: DataCallback<ProductResponse>){
 
         //val query = mapOf("q[name_cont]" to "medias" )
 
-        ApiClient.apiService.searchProducts(userToken, query, page).enqueue(object : Callback<ProductResponse> {
+        ApiClient.apiService.filterProducts(userToken, keywords, filters, page).enqueue(object : Callback<ProductResponse> {
             override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
