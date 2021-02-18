@@ -17,14 +17,16 @@ import retrofit2.http.*
  */
 interface ApiService {
 
+
     @GET("products")
     fun getAllProducts(@Header("X-Spree-Token") userToken: String):Call<ProductResponse>
 
     @GET("products")
     fun getProducts(@Header("X-Spree-Token") userToken: String, @Query("page") page: Int):Call<ProductResponse>
 
+
     @GET("products")
-    fun searchProducts(@Header("X-Spree-Token") userToken: String, @QueryMap(encoded = true) query: Map<String, String>, @Query("page") page: Int):Call<ProductResponse>
+    fun searchProducts(@Header("X-Spree-Token") userToken: String, @QueryMap(encoded = true) filters: Map<String, String>, @Query("page") page: Int):Call<ProductResponse>
 
     @GET("products/{productIdOrSlug}")
     fun getProduct(@Header("X-Spree-Token") userToken: String, @Path("productIdOrSlug") productIdOrSlug: String):Call<Product>

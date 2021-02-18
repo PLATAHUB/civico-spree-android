@@ -1,5 +1,6 @@
 package com.civico.app.spreelibrary.api.model
 
+import com.civico.app.spreelibrary.model.products.Filters
 import com.civico.app.spreelibrary.model.products.Product
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -8,6 +9,9 @@ class ProductResponse: Serializable {
 
     @SerializedName("products")
     var products:List<Product> = ArrayList()
+
+    @SerializedName("filters")
+    var filters:Filters? = null
 
     @SerializedName("count")
     var count: Int = 0
@@ -25,7 +29,7 @@ class ProductResponse: Serializable {
     var pages: Int = 0
 
     override fun toString(): String {
-        return "ProductResponse(products=$products, count=$count, totalCount=$totalCount, currentPage=$currentPage, perPage=$perPage, pages=$pages)"
+        return "ProductResponse(products=$products, filters=$filters, count=$count, totalCount=$totalCount, currentPage=$currentPage, perPage=$perPage, pages=$pages)"
     }
 
 }

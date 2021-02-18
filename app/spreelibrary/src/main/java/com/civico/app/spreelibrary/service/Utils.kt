@@ -13,7 +13,7 @@ object Utils {
 
     fun <T> executeCorrectResponse(response: Response<T>, dataCallback: DataCallback<T>){
         if (response.isSuccessful) {
-            response.body()?.let { dataCallback.onResponse(it) }
+            response.body()?.let { dataCallback.onResponse(response.code(), it) }
             return
         }
         val message: ErrorResponse = Gson().fromJson(response.errorBody()!!.charStream(), ErrorResponse::class.java)
