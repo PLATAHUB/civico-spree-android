@@ -18,6 +18,9 @@ import retrofit2.http.*
 interface ApiService {
 
     @GET("products")
+    fun getAllProducts(@Header("X-Spree-Token") userToken: String):Call<ProductResponse>
+
+    @GET("products")
     fun getProducts(@Header("X-Spree-Token") userToken: String, @Query("page") page: Int):Call<ProductResponse>
 
     @GET("products")
@@ -84,8 +87,8 @@ interface ApiService {
     fun removeCouponCode(@Header("X-Spree-Token") userToken: String, @Path("orderNumber") orderNumber: String, @Body coupon: Coupon):Call<CouponResponse>
 
     @PUT("business/customers/{id-cliente}/update-delivery-information")
-    fun addDelivery(@Path("id-cliente") idCliente: String,  @Query("auth_token") authToken: String, @Body deliveryInformation: DeliveryInformation):Call<DeliveryInformation>
+    fun addDelivery(@Header("city") city: String, @Path("id-cliente") idCliente: String,  @Query("auth_token") authToken: String, @Body deliveryInformation: DeliveryInformation):Call<DeliveryInformation>
 
     @GET("business/customers/{id-cliente}/delivery-information")
-    fun getDelivery(@Path("id-cliente") idCliente: String,  @Query("auth_token") authToken: String):Call<DeliveryConfiguration>
+    fun getDelivery(@Header("city") city: String, @Path("id-cliente") idCliente: String,  @Query("auth_token") authToken: String):Call<DeliveryConfiguration>
 }

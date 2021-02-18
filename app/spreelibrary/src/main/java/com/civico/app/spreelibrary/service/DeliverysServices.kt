@@ -11,8 +11,8 @@ import retrofit2.Response
 
 object DeliverysServices {
 
-    @JvmStatic fun addDelivery(idClient: String, userToken: String, deliveryInformation: DeliveryInformation, dataCallback: DataCallback<DeliveryInformation>)  {
-        ApiClientDelivery.apiService.addDelivery(idClient, userToken, deliveryInformation).enqueue(object : Callback<DeliveryInformation> {
+    @JvmStatic fun addDelivery(city: String, idClient: String, userToken: String, deliveryInformation: DeliveryInformation, dataCallback: DataCallback<DeliveryInformation>)  {
+        ApiClientDelivery.apiService.addDelivery(city, idClient, userToken, deliveryInformation).enqueue(object : Callback<DeliveryInformation> {
             override fun onResponse(call: Call<DeliveryInformation>, response: Response<DeliveryInformation>) {
                 Utils.executeCorrectResponseDelivery(response, dataCallback)
             }
@@ -23,8 +23,8 @@ object DeliverysServices {
         })
     }
 
-    @JvmStatic fun getDelivery(idClient: String, userToken: String, dataCallback: DataCallback<DeliveryConfiguration>)  {
-        ApiClientDelivery.apiService.getDelivery(idClient, userToken).enqueue(object : Callback<DeliveryConfiguration> {
+    @JvmStatic fun getDelivery(city: String, idClient: String, userToken: String, dataCallback: DataCallback<DeliveryConfiguration>)  {
+        ApiClientDelivery.apiService.getDelivery(city, idClient, userToken).enqueue(object : Callback<DeliveryConfiguration> {
             override fun onResponse(call: Call<DeliveryConfiguration>, response: Response<DeliveryConfiguration>) {
                 Utils.executeCorrectResponseDelivery(response, dataCallback)
             }
