@@ -26,25 +26,12 @@ object ProductServices {
         })
     }*/
 
-    fun searchProducts(userToken:String, page:Int=1, keywords:String, dataCallback: DataCallback<ProductResponse>){
+    /**
+     * Filters: keywords, taxon, price, offer. mapOf(filter to "valor" )
+     */
+    fun searchProducts(userToken:String, page:Int=1, filters:Map<String, String>, dataCallback: DataCallback<ProductResponse>){
 
-        ApiClient.apiService.searchProducts(userToken, keywords, page).enqueue(object : Callback<ProductResponse> {
-            override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
-                Utils.executeCorrectResponse(response, dataCallback)
-            }
-
-            override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
-                Utils.executeFailedResponse(t, dataCallback)
-            }
-        })
-
-    }
-
-    fun filterProducts(userToken:String, page:Int=1, keywords:String, filters:Map<String, String>, dataCallback: DataCallback<ProductResponse>){
-
-        //val query = mapOf("q[name_cont]" to "medias" )
-
-        ApiClient.apiService.filterProducts(userToken, keywords, filters, page).enqueue(object : Callback<ProductResponse> {
+        ApiClient.apiService.searchProducts(userToken, filters, page).enqueue(object : Callback<ProductResponse> {
             override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }

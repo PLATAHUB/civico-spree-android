@@ -6,51 +6,51 @@ import java.io.Serializable
 class Address: Serializable {
 
     @SerializedName("id")
-    val id: Int = 0
+    var id: Int = 0
 
     @SerializedName("firstname")
-    val firstName: String = ""
+    var firstName: String = ""
 
     @SerializedName("lastname")
-    val lastName: String = ""
+    var lastName: String = ""
 
     @SerializedName("address1")
-    val addressLine1: String = ""
+    var addressLine1: String = ""
 
     @SerializedName("address2")
-    val addressLine2: String = ""
+    var addressLine2: String = ""
 
     @SerializedName("city")
-    val city: String = ""
+    var city: String = ""
 
     @SerializedName("zipcode")
-    val zipcode: String = ""
+    var zipcode: String = ""
 
     @SerializedName("phone")
-    val phone: String = ""
+    var phone: String = ""
 
     @SerializedName("company")
-    val company: String = ""
+    var company: String = ""
 
     @SerializedName("alternative_phone")
-    val alternativePhone: String = ""
+    var alternativePhone: String = ""
 
     @SerializedName("country_id")
-    val countryId: Int = 0
+    var countryId: Int = 0
 
     @SerializedName("state_id")
-    val stateId: Int = 0
+    var stateId: Int = 0
 
     @SerializedName("state_name")
-    val stateName: String = ""
+    var stateName: String = ""
 
     @SerializedName("state_text")
-    val stateText: String = ""
+    var stateText: String = ""
 
     @SerializedName("country")
-    val country: Country? = null
+    var country: Country? = null
 
     @SerializedName("state")
-    val state: State? = null
+    var state: State? = null
 
 }

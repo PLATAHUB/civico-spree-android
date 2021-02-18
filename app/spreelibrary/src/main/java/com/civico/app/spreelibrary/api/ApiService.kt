@@ -19,10 +19,7 @@ interface ApiService {
     fun getProducts(@Header("X-Spree-Token") userToken: String, @Query("page") page: Int):Call<ProductResponse>*/
 
     @GET("products")
-    fun searchProducts(@Header("X-Spree-Token") userToken: String, @Query("keywords") keywords: String, @Query("page") page: Int):Call<ProductResponse>
-
-    @GET("products")
-    fun filterProducts(@Header("X-Spree-Token") userToken: String, @Query("keywords") keywords: String, @QueryMap(encoded = true) filters: Map<String, String>, @Query("page") page: Int):Call<ProductResponse>
+    fun searchProducts(@Header("X-Spree-Token") userToken: String, @QueryMap(encoded = true) filters: Map<String, String>, @Query("page") page: Int):Call<ProductResponse>
 
     @GET("products/{productIdOrSlug}")
     fun getProduct(@Header("X-Spree-Token") userToken: String, @Path("productIdOrSlug") productIdOrSlug: String):Call<Product>

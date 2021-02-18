@@ -23,9 +23,11 @@ class RunServices {
             val token = "6e7bfb9ab9140b85e28e6587da0859dd980ce34e52f06fef7af5553f18915770"
             //orderServices(token)
 
-            ProductServices.searchProducts(token, 1, "medias", object: DataCallback<ProductResponse>{
-                override fun onResponse(data: ProductResponse) {
-                    println(data.filters)
+            val filters = mapOf("keywords" to "medias" )
+
+            ProductServices.searchProducts(token, 1, filters, object: DataCallback<ProductResponse>{
+                override fun onResponse(code:Int, data: ProductResponse) {
+                    println(""+code+" "+data.products)
                 }
 
                 override fun onError(code: Int, message: String) {
@@ -52,7 +54,7 @@ class RunServices {
 
         private fun orderServices(userToken:String){
             OrderServices.getOrder("R118199495", "XD8oN79QOa5pdo9QnYzDww1603224099434", object : DataCallback<Order>{
-                override fun onResponse(data: Order) {
+                override fun onResponse(code:Int, data: Order) {
                     println(data)
                 }
 
@@ -63,7 +65,7 @@ class RunServices {
             })
 
             OrderServices.getOrders(userToken = userToken, dataCallback =  object : DataCallback<OrderResponse>{
-                override fun onResponse(data: OrderResponse) {
+                override fun onResponse(code:Int, data: OrderResponse) {
                     println(data)
                 }
 
