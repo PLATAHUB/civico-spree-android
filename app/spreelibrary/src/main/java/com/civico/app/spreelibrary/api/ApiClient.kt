@@ -16,7 +16,7 @@ object ApiClient {
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
-            .client(makeOkHttpClient())
+            //.client(makeOkHttpClient())
             .baseUrl(BASE_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

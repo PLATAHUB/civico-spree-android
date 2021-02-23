@@ -59,11 +59,20 @@ class Product: Serializable {
     @SerializedName("compare_at_price")
     var compareAtPrice: String = ""
 
+    @SerializedName("display_compare_at_price")
+    var displayCompareAtPrice: String = ""
+
     @SerializedName("vendor_id")
     var vendorId: Int = 0
 
     @SerializedName("vendor_name")
     var vendorName: String = ""
+
+    @SerializedName("vendor_rating")
+    var vendorRating: Float = 0F
+
+    @SerializedName("place_id")
+    var placeId: String = ""
 
     @SerializedName("product_url")
     var productUrl: String = ""
@@ -93,7 +102,8 @@ class Product: Serializable {
     var hasVariants:Boolean = false
 
     override fun toString(): String {
-        return "Product(id=$id, name='$name', description='$description', price='$price', displayPrice='$displayPrice', availableOn='$availableOn', slug='$slug', metaDescription='$metaDescription', metaKeywords='$metaKeywords', shippingCategoryId=$shippingCategoryId, taxonIds=$taxonIds, totalOnHand=$totalOnHand, lat=$lat, lng=$lng, conditions='$conditions', offer=$offer, percentageDiscount=$percentageDiscount, compareAtPrice='$compareAtPrice', vendorId=$vendorId, vendorName='$vendorName', productUrl='$productUrl', avgRating=$avgRating, reviewsCount='$reviewsCount', master=$master, variants=$variants, optionTypes=$optionTypes, productProperties=$productProperties, classifications=$classifications, hasVariants=$hasVariants)"
+        return "Product(id=$id, name='$name', description='$description', price='$price', displayPrice='$displayPrice', availableOn='$availableOn', slug='$slug', metaDescription='$metaDescription', metaKeywords='$metaKeywords', shippingCategoryId=$shippingCategoryId, taxonIds=$taxonIds, totalOnHand=$totalOnHand, lat=$lat, lng=$lng, conditions='$conditions', offer=$offer, percentageDiscount=$percentageDiscount, compareAtPrice='$compareAtPrice', vendorId=$vendorId, vendorName='$vendorName', vendorRating=$vendorRating, placeId='$placeId', productUrl='$productUrl', avgRating=$avgRating, reviewsCount='$reviewsCount', master=$master, variants=$variants, optionTypes=$optionTypes, productProperties=$productProperties, classifications=$classifications, hasVariants=$hasVariants)"
     }
+
 
 }
