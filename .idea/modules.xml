@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SpreeApp.iml" filepath="$PROJECT_DIR$/.idea/modules/SpreeApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SpreeApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SpreeApp.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/spreelibrary/SpreeApp.app.spreelibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/app/spreelibrary/SpreeApp.app.spreelibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/spreelibrary-release/SpreeApp.spreelibrary-release.iml" filepath="$PROJECT_DIR$/.idea/modules/spreelibrary-release/SpreeApp.spreelibrary-release.iml" />
     </modules>
   </component>
 </project>

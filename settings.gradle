@@ -1,3 +1,4 @@
+include ':spreelibrary-release'
 include ':app:spreelibrary'
 include ':app'
 rootProject.name = "SpreeApp"

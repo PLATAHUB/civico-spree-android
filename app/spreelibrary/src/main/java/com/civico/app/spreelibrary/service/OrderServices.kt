@@ -7,6 +7,7 @@ import com.civico.app.spreelibrary.api.model.OrderResponse
 import com.civico.app.spreelibrary.api.model.OrderWrapper
 import com.civico.app.spreelibrary.model.orders.Coupon
 import com.civico.app.spreelibrary.model.orders.Order
+import com.civico.app.spreelibrary.model.orders.Shipment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,7 +18,7 @@ import retrofit2.Response
  */
 object OrderServices {
 
-    fun getOrders(userToken: String, page: Int = 1, dataCallback: DataCallback<OrderResponse>){
+    fun getOrders(userToken: String, page: Int = 1, dataCallback: DataCallback<OrderResponse>) {
         ApiClient.apiService.getOrders(userToken, page).enqueue(object : Callback<OrderResponse> {
             override fun onResponse(call: Call<OrderResponse>, response: Response<OrderResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
@@ -29,7 +30,7 @@ object OrderServices {
         })
     }
 
-    fun getOrder(numberOrder: String, tokenOrder: String, dataCallback: DataCallback<Order>){
+    fun getOrder(numberOrder: String, tokenOrder: String, dataCallback: DataCallback<Order>) {
         ApiClient.apiService.getOrder(numberOrder, tokenOrder).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
@@ -41,7 +42,7 @@ object OrderServices {
         })
     }
 
-    fun getUserOrder(userToken: String, numberOrder: String, dataCallback: DataCallback<Order>){
+    fun getUserOrder(userToken: String, numberOrder: String, dataCallback: DataCallback<Order>) {
         ApiClient.apiService.getUserOrder(numberOrder, userToken).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
@@ -53,7 +54,11 @@ object OrderServices {
         })
     }
 
-    fun createOrder(userToken: String, orderWrapper: OrderWrapper, dataCallback: DataCallback<Order>){
+    fun createOrder(
+        userToken: String,
+        orderWrapper: OrderWrapper,
+        dataCallback: DataCallback<Order>
+    ) {
         ApiClient.apiService.createOrder(userToken, orderWrapper).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
@@ -65,43 +70,62 @@ object OrderServices {
         })
     }
 
-    fun addToCart(userToken: String, orderNumber: String, lineItemWrapper: LineItemWrapper, dataCallback: DataCallback<Order>){
-        ApiClient.apiService.addToCart(orderNumber, userToken, lineItemWrapper).enqueue(object : Callback<Order> {
-            override fun onResponse(call: Call<Order>, response: Response<Order>) {
-                Utils.executeCorrectResponse(response, dataCallback)
-            }
+    fun addToCart(
+        userToken: String,
+        orderNumber: String,
+        lineItemWrapper: LineItemWrapper,
+        dataCallback: DataCallback<Order>
+    ) {
+        ApiClient.apiService.addToCart(orderNumber, userToken, lineItemWrapper)
+            .enqueue(object : Callback<Order> {
+                override fun onResponse(call: Call<Order>, response: Response<Order>) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
 
-            override fun onFailure(call: Call<Order>, t: Throwable) {
-                Utils.executeFailedResponse(t, dataCallback)
-            }
-        })
+                override fun onFailure(call: Call<Order>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
     }
 
-    fun editCartProduct(userToken: String, orderNumber: String, idItemLine:Int, lineItemWrapper: LineItemWrapper, dataCallback: DataCallback<Order>){
-        ApiClient.apiService.editCartProduct(orderNumber, idItemLine, userToken, lineItemWrapper).enqueue(object : Callback<Order> {
-            override fun onResponse(call: Call<Order>, response: Response<Order>) {
-                Utils.executeCorrectResponse(response, dataCallback)
-            }
+    fun editCartProduct(
+        userToken: String,
+        orderNumber: String,
+        idItemLine: Int,
+        lineItemWrapper: LineItemWrapper,
+        dataCallback: DataCallback<Order>
+    ) {
+        ApiClient.apiService.editCartProduct(orderNumber, idItemLine, userToken, lineItemWrapper)
+            .enqueue(object : Callback<Order> {
+                override fun onResponse(call: Call<Order>, response: Response<Order>) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
 
-            override fun onFailure(call: Call<Order>, t: Throwable) {
-                Utils.executeFailedResponse(t, dataCallback)
-            }
-        })
+                override fun onFailure(call: Call<Order>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
     }
 
-    fun removeCartProduct(userToken: String, orderNumber: String, idItemLine:Int, dataCallback: DataCallback<Order>){
-        ApiClient.apiService.removeCartProduct(orderNumber, idItemLine, userToken).enqueue(object : Callback<Order> {
-            override fun onResponse(call: Call<Order>, response: Response<Order>) {
-                Utils.executeCorrectResponse(response, dataCallback)
-            }
+    fun removeCartProduct(
+        userToken: String,
+        orderNumber: String,
+        idItemLine: Int,
+        dataCallback: DataCallback<Order>
+    ) {
+        ApiClient.apiService.removeCartProduct(orderNumber, idItemLine, userToken)
+            .enqueue(object : Callback<Order> {
+                override fun onResponse(call: Call<Order>, response: Response<Order>) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
 
-            override fun onFailure(call: Call<Order>, t: Throwable) {
-                Utils.executeFailedResponse(t, dataCallback)
-            }
-        })
+                override fun onFailure(call: Call<Order>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
     }
 
-    fun emptyCart(userToken: String, orderNumber: String, dataCallback: DataCallback<Order>){
+    fun emptyCart(userToken: String, orderNumber: String, dataCallback: DataCallback<Order>) {
         ApiClient.apiService.emptyCart(orderNumber, userToken).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
@@ -113,28 +137,133 @@ object OrderServices {
         })
     }
 
-    fun applyCouponCode(userToken: String, orderNumber: String, coupon: Coupon, dataCallback: DataCallback<CouponResponse>){
-        ApiClient.apiService.applyCouponCode(userToken, orderNumber, coupon).enqueue(object : Callback<CouponResponse> {
-            override fun onResponse(call: Call<CouponResponse>, response: Response<CouponResponse>) {
+    fun applyCouponCode(
+        userToken: String,
+        orderNumber: String,
+        coupon: Coupon,
+        dataCallback: DataCallback<CouponResponse>
+    ) {
+        ApiClient.apiService.applyCouponCode(userToken, orderNumber, coupon)
+            .enqueue(object : Callback<CouponResponse> {
+                override fun onResponse(
+                    call: Call<CouponResponse>,
+                    response: Response<CouponResponse>
+                ) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
+
+                override fun onFailure(call: Call<CouponResponse>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
+    }
+
+    fun removeCouponCode(
+        userToken: String,
+        orderNumber: String,
+        coupon: Coupon,
+        dataCallback: DataCallback<CouponResponse>
+    ) {
+        ApiClient.apiService.removeCouponCode(userToken, orderNumber, coupon)
+            .enqueue(object : Callback<CouponResponse> {
+                override fun onResponse(
+                    call: Call<CouponResponse>,
+                    response: Response<CouponResponse>
+                ) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
+
+                override fun onFailure(call: Call<CouponResponse>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
+    }
+
+    fun updateTracking(
+        userToken: String,
+        orderWrapper: OrderWrapper,
+        dataCallback: DataCallback<Order>
+    ) {
+        ApiClient.apiService.createOrder(userToken, orderWrapper).enqueue(object : Callback<Order> {
+            override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
 
-            override fun onFailure(call: Call<CouponResponse>, t: Throwable) {
+            override fun onFailure(call: Call<Order>, t: Throwable) {
                 Utils.executeFailedResponse(t, dataCallback)
             }
         })
     }
 
-    fun removeCouponCode(userToken: String, orderNumber: String, coupon: Coupon, dataCallback: DataCallback<CouponResponse>){
-        ApiClient.apiService.removeCouponCode(userToken, orderNumber, coupon).enqueue(object : Callback<CouponResponse> {
-            override fun onResponse(call: Call<CouponResponse>, response: Response<CouponResponse>) {
-                Utils.executeCorrectResponse(response, dataCallback)
-            }
+    fun approveOrder(orderNumber: String, userToken: String, dataCallback: DataCallback<Order>) {
+        ApiClient.apiService.approveOrder(orderNumber = orderNumber, userToken = userToken)
+            .enqueue(object : Callback<Order> {
+                override fun onResponse(call: Call<Order>, response: Response<Order>) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
 
-            override fun onFailure(call: Call<CouponResponse>, t: Throwable) {
-                Utils.executeFailedResponse(t, dataCallback)
-            }
-        })
+                override fun onFailure(call: Call<Order>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
     }
 
+    fun shipmentIsReady(
+        id_pedido: String,
+        userToken: String,
+        dataCallback: DataCallback<Shipment>
+    ) {
+        ApiClient.apiService.shipmentIsReady(idEnvio = id_pedido, userToken = userToken)
+            .enqueue(object : Callback<Shipment> {
+                override fun onResponse(call: Call<Shipment>, response: Response<Shipment>) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
+
+                override fun onFailure(call: Call<Shipment>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
+    }
+
+    fun getSortedOrders(
+        userToken: String,
+        page: Int = 2,
+        dataCallback: DataCallback<OrderResponse>
+    ) {
+        ApiClient.apiService.getSortedOrders(userToken, page)
+            .enqueue(object : Callback<OrderResponse> {
+                override fun onResponse(
+                    call: Call<OrderResponse>,
+                    response: Response<OrderResponse>
+                ) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
+
+                override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
+    }
+
+    fun updateShipmentTracking(
+        id_pedido: String,
+        trackingNumber: String,
+        userToken: String,
+        dataCallback: DataCallback<Shipment>
+    ) {
+        ApiClient.apiService.updateShipmentTracking(
+            idEnvio = id_pedido,
+            idTracking = mapOf("shipment[tracking]" to trackingNumber),
+            userToken = userToken
+        )
+            .enqueue(object : Callback<Shipment> {
+                override fun onResponse(call: Call<Shipment>, response: Response<Shipment>) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
+
+                override fun onFailure(call: Call<Shipment>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
+    }
 }
