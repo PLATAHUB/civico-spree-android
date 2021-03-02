@@ -4,6 +4,9 @@ import com.civico.app.spreelibrary.api.ApiClient
 import com.civico.app.spreelibrary.model.products.Image
 import com.civico.app.spreelibrary.model.products.Product
 import com.civico.app.spreelibrary.api.model.ProductResponse
+import com.civico.app.spreelibrary.api.model.ReviewResponse
+import com.civico.app.spreelibrary.api.model.ReviewWrapper
+import com.civico.app.spreelibrary.model.products.Review
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -77,6 +80,42 @@ object ProductServices {
             }
 
             override fun onFailure(call: Call<Image>, t: Throwable) {
+                Utils.executeFailedResponse(t, dataCallback)
+            }
+        })
+    }
+
+    fun getProductReviews(userToken:String, productIdOrSlug:String, page:Int, dataCallback: DataCallback<ReviewResponse> ){
+        ApiClient.apiService.getProductReviews(userToken, productIdOrSlug, page).enqueue(object : Callback<ReviewResponse> {
+            override fun onResponse(call: Call<ReviewResponse>, response: Response<ReviewResponse>) {
+                Utils.executeCorrectResponse(response, dataCallback)
+            }
+
+            override fun onFailure(call: Call<ReviewResponse>, t: Throwable) {
+                Utils.executeFailedResponse(t, dataCallback)
+            }
+        })
+    }
+
+    fun getReview(userToken:String, productIdOrSlug:String, idReview:Int, dataCallback: DataCallback<Review> ){
+        ApiClient.apiService.getReview(userToken, productIdOrSlug, idReview).enqueue(object : Callback<Review> {
+            override fun onResponse(call: Call<Review>, response: Response<Review>) {
+                Utils.executeCorrectResponse(response, dataCallback)
+            }
+
+            override fun onFailure(call: Call<Review>, t: Throwable) {
+                Utils.executeFailedResponse(t, dataCallback)
+            }
+        })
+    }
+
+    fun createReview(userToken:String, productIdOrSlug:String, review: ReviewWrapper, dataCallback: DataCallback<Review> ){
+        ApiClient.apiService.createReview(userToken, productIdOrSlug, review).enqueue(object : Callback<Review> {
+            override fun onResponse(call: Call<Review>, response: Response<Review>) {
+                Utils.executeCorrectResponse(response, dataCallback)
+            }
+
+            override fun onFailure(call: Call<Review>, t: Throwable) {
                 Utils.executeFailedResponse(t, dataCallback)
             }
         })

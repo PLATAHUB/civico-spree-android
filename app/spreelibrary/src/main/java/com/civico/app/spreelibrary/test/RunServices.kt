@@ -1,10 +1,9 @@
 package com.civico.app.spreelibrary.test
 
-import com.civico.app.spreelibrary.api.model.CouponResponse
+import com.civico.app.spreelibrary.api.model.*
 import com.civico.app.spreelibrary.model.orders.Order
-import com.civico.app.spreelibrary.api.model.OrderResponse
-import com.civico.app.spreelibrary.api.model.ProductResponse
 import com.civico.app.spreelibrary.model.orders.Coupon
+import com.civico.app.spreelibrary.model.products.Review
 import com.civico.app.spreelibrary.service.DataCallback
 import com.civico.app.spreelibrary.service.OrderServices
 import com.civico.app.spreelibrary.service.ProductServices
@@ -23,7 +22,7 @@ class RunServices {
             val token = "6e7bfb9ab9140b85e28e6587da0859dd980ce34e52f06fef7af5553f18915770"
             //orderServices(token)
 
-            val filters = mapOf("keywords" to "medias" )
+            /*val filters = mapOf("keywords" to "medias" )
 
             ProductServices.searchProducts(token, 1, filters, object: DataCallback<ProductResponse>{
                 override fun onResponse(code:Int, data: ProductResponse) {
@@ -34,7 +33,7 @@ class RunServices {
                     println(message)
                 }
 
-            })
+            })*/
 
             /*val coupon = Coupon()
             coupon.couponCode = "CIVICO10"
@@ -49,6 +48,20 @@ class RunServices {
                 }
 
             })*/
+
+            val review = ReviewWrapper()
+            val reviewObj = Review(2, "Prueba libreria", "Producto regular", "Pepito", true)
+            review.review = reviewObj
+
+            ProductServices.createReview(token, "11", review, object:DataCallback<Review>{
+                override fun onResponse(code: Int, data: Review) {
+                    println(data)
+                }
+
+                override fun onError(code: Int, message: String) {
+                    println(message)
+                }
+            })
 
         }
 

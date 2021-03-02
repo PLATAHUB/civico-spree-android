@@ -6,6 +6,7 @@ import com.civico.app.spreelibrary.model.orders.Coupon
 import com.civico.app.spreelibrary.model.orders.Order
 import com.civico.app.spreelibrary.model.products.Image
 import com.civico.app.spreelibrary.model.products.Product
+import com.civico.app.spreelibrary.model.products.Review
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -29,6 +30,15 @@ interface ApiService {
 
     @GET("products/{productIdOrSlug}/images/{idImage}")
     fun getProductImage(@Header("X-Spree-Token") userToken: String, @Path("productIdOrSlug") productIdOrSlug: String, @Path("idImage") idImage: Int):Call<Image>
+
+    @GET("products/{productIdOrSlug}/reviews")
+    fun getProductReviews(@Header("X-Spree-Token") userToken: String, @Path("productIdOrSlug") productIdOrSlug: String, @Query("page") page: Int):Call<ReviewResponse>
+
+    @GET("products/{productIdOrSlug}/reviews/{idReview}")
+    fun getReview(@Header("X-Spree-Token") userToken: String, @Path("productIdOrSlug") productIdOrSlug: String, @Path("idReview") idReview: Int):Call<Review>
+
+    @POST("products/{productIdOrSlug}/reviews")
+    fun createReview(@Header("X-Spree-Token") userToken: String, @Path("productIdOrSlug") productIdOrSlug: String, @Body review: ReviewWrapper):Call<Review>
 
     @POST("orders")
     fun createOrder(@Header("X-Spree-Token") userToken: String, @Body orderWrapper: OrderWrapper):Call<Order>
