@@ -6,16 +6,16 @@ import java.io.Serializable
 class DeliverySchedules : Serializable {
 
     @SerializedName("start_day")
-    var start_day: Int? = 0
+    var start_day: Int? = null
 
     @SerializedName("end_day")
-    var end_day: Int? = 0
+    var end_day: Int? = null
 
     @SerializedName("start_hour")
-    var start_hour: String? = ""
+    var start_hour: String? = null
 
     @SerializedName("end_hour")
-    var end_hour: String? = ""
+    var end_hour: String? = null
 
     @SerializedName("open_24")
     var open_24: Boolean? = false

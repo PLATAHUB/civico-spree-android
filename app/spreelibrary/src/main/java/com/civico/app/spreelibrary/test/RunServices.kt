@@ -1,10 +1,10 @@
 package com.civico.app.spreelibrary.test
 
-import com.civico.app.spreelibrary.api.model.CouponResponse
-import com.civico.app.spreelibrary.model.orders.Order
 import com.civico.app.spreelibrary.api.model.OrderResponse
 import com.civico.app.spreelibrary.api.model.ProductResponse
 import com.civico.app.spreelibrary.model.orders.Coupon
+import com.civico.app.spreelibrary.model.orders.Order
+import com.civico.app.spreelibrary.model.orders.Shipment
 import com.civico.app.spreelibrary.service.DataCallback
 import com.civico.app.spreelibrary.service.OrderServices
 import com.civico.app.spreelibrary.service.ProductServices
@@ -45,7 +45,8 @@ class RunServices {
                 }
 
                 override fun onError(code: Int, message: String) {
-                    print(message)
+                    println(code)
+                    println(message)
                 }
 
             })*/
@@ -73,7 +74,7 @@ class RunServices {
                     println(code)
                     println(message)
                 }
-            })
+            })*/
         }
     }
 
