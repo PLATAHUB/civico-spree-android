@@ -23,6 +23,9 @@ class Product: Serializable {
     @SerializedName("available_on")
     var availableOn:String = ""
 
+    @SerializedName("discontinue_on")
+    var discontinueOn: String = ""
+
     @SerializedName("slug")
     var slug:String = ""
 

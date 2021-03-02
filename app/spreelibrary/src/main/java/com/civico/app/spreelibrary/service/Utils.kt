@@ -27,7 +27,7 @@ object Utils {
 
     fun <T> executeCorrectResponseDelivery(response: Response<T>, dataCallback: DataCallback<T>){
         if (response.isSuccessful) {
-            response.body()?.let { dataCallback.onResponse(it) }
+            response.body()?.let { dataCallback.onResponse(response.code(), it) }
             return
         }
         val message: ErrorResponseDelivery = Gson().fromJson(response.errorBody()!!.charStream(), ErrorResponseDelivery::class.java)

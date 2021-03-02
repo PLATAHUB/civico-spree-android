@@ -6,9 +6,10 @@ import com.civico.app.spreelibrary.model.delivery.DeliveryConfiguration
 import com.civico.app.spreelibrary.model.delivery.DeliveryInformation
 import com.civico.app.spreelibrary.model.orders.Coupon
 import com.civico.app.spreelibrary.model.orders.Order
-import com.civico.app.spreelibrary.model.products.Image
-import com.civico.app.spreelibrary.model.products.Product
+import com.civico.app.spreelibrary.model.products.*
+import okhttp3.MultipartBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 /**
@@ -17,13 +18,11 @@ import retrofit2.http.*
  */
 interface ApiService {
 
-
     @GET("products")
     fun getAllProducts(@Header("X-Spree-Token") userToken: String):Call<ProductResponse>
 
     @GET("products")
-    fun getProducts(@Header("X-Spree-Token") userToken: String, @Query("page") page: Int):Call<ProductResponse>
-
+    fun getProducts(@Header("X-Spree-Token") userToken: String, @Query("page") page: Int, @Query("per_page") perPage: Int):Call<ProductResponse>
 
     @GET("products")
     fun searchProducts(@Header("X-Spree-Token") userToken: String, @QueryMap(encoded = true) filters: Map<String, String>, @Query("page") page: Int):Call<ProductResponse>
@@ -36,6 +35,24 @@ interface ApiService {
 
     @GET("products/{productIdOrSlug}/images/{idImage}")
     fun getProductImage(@Header("X-Spree-Token") userToken: String, @Path("productIdOrSlug") productIdOrSlug: String, @Path("idImage") idImage: Int):Call<Image>
+
+    @PUT("products/{id_product}")
+    fun updateProduct(@Header("X-Spree-Token") userToken: String,@Path("id_product") idProduct: Int, @Body product: ProductConfiguration): Call<Product>
+
+    @POST("products")
+    fun addProduct(@Header("X-Spree-Token") userToken: String, @Body product: ProductConfiguration): Call<Product>
+
+    @POST("products/{id_product}/images")
+    fun addProductImage(@Header("X-Spree-Token") userToken: String, @Path("id_product") idProduct: Int, @Body image: MultipartBody): Call<Image>
+
+    @PUT("products/{id_product}/images/{id_image}")
+    fun updateProductImage(@Header("X-Spree-Token") userToken: String,  @Path("id_product") idProduct: Int,  @Path("id_image") idImage: Int, @Body image: MultipartBody): Call<Image>
+
+    @DELETE("products/{id_product}/images/{id_image}")
+    fun deletProductImage(@Header("X-Spree-Token") userToken: String,  @Path("id_product") idProduct: Int,  @Path("id_image") idImage: Int): Call<Any?>
+
+    @DELETE("products/{id_product}")
+    fun deletProduct(@Header("X-Spree-Token") userToken: String,  @Path("id_product") idProduct: Int): Call<Any?>
 
     @POST("orders")
     fun createOrder(@Header("X-Spree-Token") userToken: String, @Body orderWrapper: OrderWrapper):Call<Order>
@@ -81,6 +98,9 @@ interface ApiService {
 
     @GET("taxonomies/{TaxonsId}/taxons/{TaxonId}")
     fun getTaxonomie(@Header("X-Spree-Token") userToken: String, @Path("TaxonsId") TaxonsId: Int, @Path("TaxonId") TaxonId: Int):Call<Taxon>
+
+    @GET("taxons")
+    fun getTaxonsCategory(@Query("per_page") perPage: Int, @Query("page") page: Int, @Query("without_children") withoutChildren: Boolean, @Query("q[name_cont]") nameCont: String,  @Query("token") authToken: String):Call<Taxons>
 
     @PUT("orders/{orderNumber}/apply_coupon_code")
     fun applyCouponCode(@Header("X-Spree-Token") userToken: String, @Path("orderNumber") orderNumber: String, @Body coupon: Coupon):Call<CouponResponse>

@@ -3,6 +3,7 @@ package com.civico.app.spreelibrary.service
 import com.civico.app.spreelibrary.api.ApiClient
 import com.civico.app.spreelibrary.api.model.TaxonResponse
 import com.civico.app.spreelibrary.model.categories.Taxon
+import com.civico.app.spreelibrary.model.products.Taxons
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +31,17 @@ object TaxonServices {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
             override fun onFailure(call: Call<Taxon>, t: Throwable) {
+                Utils.executeFailedResponse(t, dataCallback)
+            }
+        })
+    }
+
+    fun getTaxonCategory(perPage:Int=50, page:Int=1, withoutChildren:Boolean=true, nameCount:String, userToken:String, dataCallback: DataCallback<Taxons>){
+        ApiClient.apiService.getTaxonsCategory(perPage, page, withoutChildren, nameCount, userToken).enqueue(object : Callback<Taxons> {
+            override fun onResponse(call: Call<Taxons>, response: Response<Taxons>) {
+                Utils.executeCorrectResponse(response, dataCallback)
+            }
+            override fun onFailure(call: Call<Taxons>, t: Throwable) {
                 Utils.executeFailedResponse(t, dataCallback)
             }
         })

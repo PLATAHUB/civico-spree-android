@@ -20,8 +20,6 @@ class DeliverySchedules : Serializable {
     @SerializedName("open_24")
     var open_24: Boolean? = false
 
-    ////////////////7
-
     @SerializedName("scheduleDelete")
     var scheduleDelete: Boolean? = false
 
