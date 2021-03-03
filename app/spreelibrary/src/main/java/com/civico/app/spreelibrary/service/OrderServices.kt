@@ -225,12 +225,32 @@ object OrderServices {
             })
     }
 
-    fun getSortedOrders(
+    fun getSortedNewOrders(
         userToken: String,
         page: Int = 2,
         dataCallback: DataCallback<OrderResponse>
     ) {
-        ApiClient.apiService.getSortedOrders(userToken, page)
+        ApiClient.apiService.getSortedNewOrders(userToken, page)
+            .enqueue(object : Callback<OrderResponse> {
+                override fun onResponse(
+                    call: Call<OrderResponse>,
+                    response: Response<OrderResponse>
+                ) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
+
+                override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
+    }
+
+    fun getSortedCompleteOrders(
+        userToken: String,
+        page: Int = 2,
+        dataCallback: DataCallback<OrderResponse>
+    ) {
+        ApiClient.apiService.getSortedCompleteOrders(userToken, page)
             .enqueue(object : Callback<OrderResponse> {
                 override fun onResponse(
                     call: Call<OrderResponse>,
