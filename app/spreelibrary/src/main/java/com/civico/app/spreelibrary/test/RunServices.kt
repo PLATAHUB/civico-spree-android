@@ -1,12 +1,6 @@
 package com.civico.app.spreelibrary.test
 
-import com.civico.app.spreelibrary.api.model.OrderResponse
-import com.civico.app.spreelibrary.api.model.ProductResponse
-import com.civico.app.spreelibrary.model.orders.Coupon
-import com.civico.app.spreelibrary.model.orders.Order
-import com.civico.app.spreelibrary.model.orders.Shipment
-import com.civico.app.spreelibrary.service.DataCallback
-import com.civico.app.spreelibrary.service.OrderServices
+import com.civico.app.spreelibrary.service.DataCallbackDelete
 import com.civico.app.spreelibrary.service.ProductServices
 
 /**
@@ -25,7 +19,23 @@ class RunServices {
 
             val filters = mapOf("keywords" to "medias" )
 
-            ProductServices.searchProducts(token, 1, filters, object: DataCallback<ProductResponse>{
+            var respuesta = ProductServices.deleteProduct("7fb07faeb5fcf68152571afdba58284bdbf5fe30442fbcb55213949c155c9f11",
+                430,
+                object : DataCallbackDelete<Any?>{
+
+                    override fun onError(code: Int, message: String) {
+                        println("respuesta negativa " + message)
+
+                    }
+
+                    override fun onResponse() {
+                        println("respuesta positiva " )
+
+                    }
+
+                })
+
+   /*         ProductServices.searchProducts(token, 1, filters, object: DataCallback<ProductResponse>{
                 override fun onResponse(code:Int, data: ProductResponse) {
                     println(""+code+" "+data.products)
                 }
@@ -34,7 +44,7 @@ class RunServices {
                     println(message)
                 }
 
-            })
+            })*/
 
             /*val coupon = Coupon()
             coupon.couponCode = "CIVICO10"
@@ -53,7 +63,7 @@ class RunServices {
 
         }
 
-        private fun orderServices(userToken:String){
+       /* private fun orderServices(userToken:String){
             OrderServices.getOrder("R118199495", "XD8oN79QOa5pdo9QnYzDww1603224099434", object : DataCallback<Order>{
                 override fun onResponse(code:Int, data: Order) {
                     println(data)
@@ -74,9 +84,9 @@ class RunServices {
                     println(code)
                     println(message)
                 }
-            })*/
-        }
-    }
+            })
+        }*/
 
+    }
 }
 

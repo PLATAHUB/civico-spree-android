@@ -20,6 +20,19 @@ object Utils {
         dataCallback.onError(response.code(), message.error)
     }
 
+    fun <T> executeCorrectResponseDelete(answerHeader: String, response: Response<T>, dataCallback: DataCallbackDelete<T>){
+        if (answerHeader == "204 No Content") {
+             dataCallback.onResponse()
+            return
+        }
+        val message: ErrorResponse = Gson().fromJson(response.errorBody()!!.charStream(), ErrorResponse::class.java)
+        dataCallback.onError(response.code(), message.error)
+    }
+
+    fun <T> executeFailedResponseDelete(t: Throwable, dataCallback: DataCallbackDelete<T>){
+        dataCallback.onError(0, t.message.toString())
+    }
+
     fun <T> executeFailedResponse(t: Throwable, dataCallback: DataCallback<T>){
         dataCallback.onError(0, t.message.toString())
     }

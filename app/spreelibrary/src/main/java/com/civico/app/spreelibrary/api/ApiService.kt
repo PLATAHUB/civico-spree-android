@@ -11,6 +11,7 @@ import okhttp3.MultipartBody
 import com.civico.app.spreelibrary.model.orders.Shipment
 import com.civico.app.spreelibrary.model.products.Image
 import com.civico.app.spreelibrary.model.products.Product
+import com.civico.app.spreelibrary.model.stock.StockItem
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -26,6 +27,14 @@ interface ApiService {
 
     @GET("products")
     fun getProducts(@Header("X-Spree-Token") userToken: String, @Query("page") page: Int, @Query("per_page") perPage: Int):Call<ProductResponse>
+
+    @GET("products")
+    fun getProductsForVendor(
+        @Header("X-Spree-Token") userToken: String,
+        @Query("vendor") vendor: String,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int):Call<ProductResponse>
+
 
     @GET("products")
     fun searchProducts(@Header("X-Spree-Token") userToken: String, @QueryMap(encoded = true) filters: Map<String, String>, @Query("page") page: Int):Call<ProductResponse>
@@ -198,5 +207,10 @@ interface ApiService {
         @QueryMap(encoded = true) idTracking: Map<String, String>,
         @Header("X-Spree-Token") userToken: String
     ): Call<Shipment>
+
+    @PUT("stock_items/{id_product}")
+    fun updateStock(@Header("X-Spree-Token") userToken: String,
+                    @Path("id_product") idProduct: Int,
+                    @Body stockItem: StockItem):Call<StockItem>
 
 }

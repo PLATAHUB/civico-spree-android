@@ -1,12 +1,9 @@
 package com.civico.app.spreelibrary.service
 
 import com.civico.app.spreelibrary.api.ApiClient
-import com.civico.app.spreelibrary.api.model.OrderWrapper
 import com.civico.app.spreelibrary.model.products.Image
 import com.civico.app.spreelibrary.model.products.Product
 import com.civico.app.spreelibrary.api.model.ProductResponse
-import com.civico.app.spreelibrary.model.orders.Order
-import com.civico.app.spreelibrary.model.products.ProductBussines
 import com.civico.app.spreelibrary.model.products.ProductConfiguration
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -22,6 +19,18 @@ object ProductServices {
 
     fun getProducts(userToken:String, page:Int=1, perPage:Int=20,  dataCallback: DataCallback<ProductResponse> ){
         ApiClient.apiService.getProducts(userToken, page, perPage).enqueue(object : Callback<ProductResponse>{
+            override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
+                Utils.executeCorrectResponse(response, dataCallback)
+            }
+
+            override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
+                Utils.executeFailedResponse(t, dataCallback)
+            }
+        })
+    }
+
+    fun getProductsForVendor(userToken:String, idVendor:String, page:Int=1, perPage:Int=20,  dataCallback: DataCallback<ProductResponse> ){
+        ApiClient.apiService.getProductsForVendor(userToken, idVendor, page, perPage).enqueue(object : Callback<ProductResponse>{
             override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -151,26 +160,30 @@ object ProductServices {
         })
     }
 
-    fun deleteProductImage(userToken: String,  idProduct : Int, idImage : Int, dataCallback: DataCallback<Any?>){
+    fun deleteProductImage(userToken: String,  idProduct : Int, idImage : Int, dataCallback: DataCallbackDelete<Any?>){
         ApiClient.apiService.deletProductImage(userToken,  idProduct, idImage).enqueue(object : Callback<Any?> {
             override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
-                Utils.executeCorrectResponse(response, dataCallback)
+                System.out.println("imprimiendo respuesta " + response.headers() + " imprimiendo status " + response.headers().get("Status"))
+                var status : String = response.headers().get("Status").toString()
+                Utils.executeCorrectResponseDelete(status, response, dataCallback)
             }
 
             override fun onFailure(call: Call<Any?>, t: Throwable) {
-                Utils.executeFailedResponse(t, dataCallback)
+                Utils.executeFailedResponseDelete(t, dataCallback)
             }
         })
     }
 
-    fun deleteProduct(userToken: String,  idProduct : Int, dataCallback: DataCallback<Any?>){
+    fun deleteProduct(userToken: String,  idProduct : Int, dataCallback: DataCallbackDelete<Any?>){
         ApiClient.apiService.deletProduct(userToken,  idProduct,).enqueue(object : Callback<Any?> {
             override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
-                Utils.executeCorrectResponse(response, dataCallback)
+                System.out.println("imprimiendo respuesta " + response.headers() + " imprimiendo status " + response.headers().get("Status"))
+                var status : String = response.headers().get("Status").toString()
+                Utils.executeCorrectResponseDelete(status, response, dataCallback)
             }
 
             override fun onFailure(call: Call<Any?>, t: Throwable) {
-                Utils.executeFailedResponse(t, dataCallback)
+                Utils.executeFailedResponseDelete(t, dataCallback)
             }
         })
     }

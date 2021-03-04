@@ -42,7 +42,7 @@ class Product: Serializable {
     var taxonIds: List<Int> = ArrayList()
 
     @SerializedName("total_on_hand")
-    var totalOnHand: Int = 0
+    var totalOnHand: Int ?= null
 
     @SerializedName("lat")
     var lat: String? = null
@@ -94,6 +94,35 @@ class Product: Serializable {
 
     @SerializedName("has_variants")
     var hasVariants:Boolean = false
+
+    /////
+
+    @SerializedName("reservation_money_back ")
+    var reservationMoneyBack: Boolean ?= null
+
+    @SerializedName("reservation_time ")
+    var reservationTime: Int ?= null
+
+    @SerializedName("reservation_time_unit ")
+    var reservationTimeUnit: String ?= null
+
+    @SerializedName("reservation_reschedule ")
+    var reservationReschedule: Boolean ?= null
+
+    @SerializedName("reservation_cancellation_time ")
+    var reservationCancellationTime: Int ?= null
+
+    @SerializedName("reservation_cancellation_time_unit ")
+    var reservationCancellationTimeUnit: String ?= null
+
+    @SerializedName("warranty_money_back")
+    var warrantyMoneyBack: Boolean ?= null
+
+    @SerializedName("warranty_time")
+    var warrantyTime: Int ?= null
+
+    @SerializedName("warranty_time_unit")
+    var warrantyTimeUnit: String ?= null
 
     override fun toString(): String {
         return "Product(id=$id, name='$name', description='$description', price='$price', displayPrice='$displayPrice', availableOn='$availableOn', slug='$slug', metaDescription='$metaDescription', metaKeywords='$metaKeywords', shippingCategoryId=$shippingCategoryId, taxonIds=$taxonIds, totalOnHand=$totalOnHand, lat=$lat, lng=$lng, conditions='$conditions', offer=$offer, percentageDiscount=$percentageDiscount, compareAtPrice='$compareAtPrice', vendorId=$vendorId, vendorName='$vendorName', productUrl='$productUrl', avgRating=$avgRating, reviewsCount='$reviewsCount', master=$master, variants=$variants, optionTypes=$optionTypes, productProperties=$productProperties, classifications=$classifications, hasVariants=$hasVariants)"

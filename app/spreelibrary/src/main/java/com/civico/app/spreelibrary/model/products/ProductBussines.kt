@@ -44,4 +44,37 @@ class ProductBussines : Serializable {
     @SerializedName("percentage_discount")
     var percentageDiscount: Int ?= null
 
+    @SerializedName("taxon_ids")
+    var taxonIds: List<Int> = ArrayList()
+
+    /////
+
+    @SerializedName("reservation_money_back ")
+    var reservationMoneyBack: Boolean ?= null
+
+    @SerializedName("reservation_time ")
+    var reservationTime: Int ?= null
+
+    @SerializedName("reservation_time_unit ")
+    var reservationTimeUnit: String ?= null
+
+    @SerializedName("reservation_reschedule ")
+    var reservationReschedule: Boolean ?= null
+
+    @SerializedName("reservation_cancellation_time ")
+    var reservationCancellationTime: Int ?= null
+
+    @SerializedName("reservation_cancellation_time_unit ")
+    var reservationCancellationTimeUnit: String ?= null
+
+    @SerializedName("warranty_money_back")
+    var warrantyMoneyBack: Boolean ?= null
+
+    @SerializedName("warranty_time")
+    var warrantyTime: Int ?= null
+
+    @SerializedName("warranty_time_unit")
+    var warrantyTimeUnit: String ?= null
+
+
 }
