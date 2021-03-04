@@ -189,10 +189,23 @@ interface ApiService {
     ): Call<Order>
 
     @GET("orders")
-    fun getSortedOrders(
+    fun getSortedNewOrders(
         @Header("X-Spree-Token") userToken: String,
         @Query("page") page: Int,
         @QueryMap(encoded = true) isSorted: Map<String, String> = mapOf("q[s]" to "id desc"),
+        @QueryMap(encoded = true) isComplete: Map<String, String> = mapOf("q[state_cont]" to "complete"),
+        @QueryMap(encoded = true) isPaid: Map<String, String> = mapOf("q[payment_state_cont]" to "paid"),
+        @QueryMap(encoded = true) isReady: Map<String, String> = mapOf("q[shipment_state_cont]" to "ready"),
+    ): Call<OrderResponse>
+
+    @GET("orders")
+    fun getSortedCompleteOrders(
+        @Header("X-Spree-Token") userToken: String,
+        @Query("page") page: Int,
+        @QueryMap(encoded = true) isSorted: Map<String, String> = mapOf("q[s]" to "id desc"),
+        @QueryMap(encoded = true) isComplete: Map<String, String> = mapOf("q[state_cont]" to "complete"),
+        @QueryMap(encoded = true) isPaid: Map<String, String> = mapOf("q[payment_state_cont]" to "paid"),
+        @QueryMap(encoded = true) isReady: Map<String, String> = mapOf("q[shipment_state_cont]" to "shipped"),
     ): Call<OrderResponse>
 
     @PUT("shipments/{id_envio}/ready")
