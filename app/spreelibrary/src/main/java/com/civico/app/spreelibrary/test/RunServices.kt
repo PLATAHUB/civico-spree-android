@@ -17,7 +17,6 @@ class RunServices {
         @JvmStatic
         fun main(args: Array<String>) {
          //   getOnlyOneOrder()
-            approveOrder()
             //  orderServices()
         }
 
@@ -28,13 +27,13 @@ class RunServices {
 
             //val token = "6e7bfb9ab9140b85e28e6587da0859dd980ce34e52f06fef7af5553f18915770"
             OrderServices.getSortedCompleteOrders(myToken, 1, object : DataCallback<OrderResponse> {
-                override fun onResponse(data: OrderResponse) {
-                    println(data)
-                }
-
                 override fun onError(code: Int, message: String) {
                     println(code)
                     println(message)
+                }
+
+                override fun onResponse(code: Int, data: OrderResponse) {
+                    println(data)
                 }
             })
             /**/
@@ -57,7 +56,7 @@ class RunServices {
                   })*/
         }
 
-        private fun getOnlyOneOrder() {
+     /*   private fun getOnlyOneOrder() {
             OrderServices.getOrder(
                 "R021201443",
                 "43TFd2bkZDzZMsa7CaQh5Q1614703800342",
@@ -87,7 +86,7 @@ class RunServices {
                         println(message)
                     }
                 })
-        }
+        }*/
     }
 }
 
