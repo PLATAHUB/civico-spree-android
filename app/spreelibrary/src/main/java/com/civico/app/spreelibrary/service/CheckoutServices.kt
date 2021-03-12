@@ -13,8 +13,8 @@ import retrofit2.Response
  */
 object CheckoutServices {
 
-    fun moveToNextState(userToken: String, orderNumber: String, dataCallback: DataCallback<Order>){
-        ApiClient.apiService.moveToNextState(orderNumber, userToken).enqueue(object : Callback<Order> {
+    fun moveToNextState(urlBase:String, userToken: String, orderNumber: String, dataCallback: DataCallback<Order>){
+        ApiClient.getInstance(urlBase).apiService.moveToNextState(orderNumber, userToken).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -25,8 +25,8 @@ object CheckoutServices {
         })
     }
 
-    fun addCheckoutAddress(userToken: String, orderNumber: String, orderWrapper: OrderWrapper, dataCallback: DataCallback<Order>){
-        ApiClient.apiService.addCheckoutAddress(orderNumber, userToken, orderWrapper).enqueue(object : Callback<Order> {
+    fun addCheckoutAddress(urlBase:String, userToken: String, orderNumber: String, orderWrapper: OrderWrapper, dataCallback: DataCallback<Order>){
+        ApiClient.getInstance(urlBase).apiService.addCheckoutAddress(orderNumber, userToken, orderWrapper).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
