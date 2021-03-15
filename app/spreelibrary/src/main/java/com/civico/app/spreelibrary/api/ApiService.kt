@@ -12,6 +12,7 @@ import com.civico.app.spreelibrary.model.orders.Shipment
 import com.civico.app.spreelibrary.model.products.Image
 import com.civico.app.spreelibrary.model.products.Product
 import com.civico.app.spreelibrary.model.stock.StockItem
+import com.civico.app.spreelibrary.model.stock.StockItemConfiguration
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -230,6 +231,6 @@ interface ApiService {
     @PUT("stock_items/{id_product}")
     fun updateStock(@Header("X-Spree-Token") userToken: String,
                     @Path("id_product") idProduct: Int,
-                    @Body stockItem: StockItem):Call<StockItem>
+                    @Body stockItem: StockItemConfiguration):Call<StockItem>
 
 }

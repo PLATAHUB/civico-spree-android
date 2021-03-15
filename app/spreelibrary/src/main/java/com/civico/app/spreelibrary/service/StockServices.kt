@@ -9,6 +9,7 @@ import com.civico.app.spreelibrary.model.orders.Order
 import com.civico.app.spreelibrary.model.products.ProductBussines
 import com.civico.app.spreelibrary.model.products.ProductConfiguration
 import com.civico.app.spreelibrary.model.stock.StockItem
+import com.civico.app.spreelibrary.model.stock.StockItemConfiguration
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,7 +22,7 @@ import retrofit2.Response
 
 object StockServices {
 
-    fun updateStock(userToken: String, idProduct: Int, stockItem: StockItem, dataCallback: DataCallback<StockItem>){
+    fun updateStock(userToken: String, idProduct: Int, stockItem: StockItemConfiguration, dataCallback: DataCallback<StockItem>){
         ApiClient.apiService.updateStock(userToken, idProduct, stockItem).enqueue(object : Callback<StockItem> {
             override fun onResponse(call: Call<StockItem>, response: Response<StockItem>) {
                 Utils.executeCorrectResponse(response, dataCallback)

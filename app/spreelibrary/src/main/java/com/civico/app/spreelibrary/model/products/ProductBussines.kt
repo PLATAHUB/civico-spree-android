@@ -27,7 +27,7 @@ class ProductBussines : Serializable {
     var shippingCategoryId:Int ?= null
 
     @SerializedName("vendor_id")
-    var vendorId: String ?= null
+    var vendorId: Int ?= null
 
     @SerializedName("compare_at_price")
     var compareAtPrice: String ?= null
@@ -49,22 +49,22 @@ class ProductBussines : Serializable {
 
     /////
 
-    @SerializedName("reservation_money_back ")
+    @SerializedName("reservation_money_back")
     var reservationMoneyBack: Boolean ?= null
 
-    @SerializedName("reservation_time ")
+    @SerializedName("reservation_time")
     var reservationTime: Int ?= null
 
-    @SerializedName("reservation_time_unit ")
+    @SerializedName("reservation_time_unit")
     var reservationTimeUnit: String ?= null
 
-    @SerializedName("reservation_reschedule ")
+    @SerializedName("reservation_reschedule")
     var reservationReschedule: Boolean ?= null
 
-    @SerializedName("reservation_cancellation_time ")
+    @SerializedName("reservation_cancellation_time")
     var reservationCancellationTime: Int ?= null
 
-    @SerializedName("reservation_cancellation_time_unit ")
+    @SerializedName("reservation_cancellation_time_unit")
     var reservationCancellationTimeUnit: String ?= null
 
     @SerializedName("warranty_money_back")
