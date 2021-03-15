@@ -22,8 +22,8 @@ import retrofit2.Response
 
 object StockServices {
 
-    fun updateStock(userToken: String, idProduct: Int, stockItem: StockItemConfiguration, dataCallback: DataCallback<StockItem>){
-        ApiClient.apiService.updateStock(userToken, idProduct, stockItem).enqueue(object : Callback<StockItem> {
+    fun updateStock(urlBase:String, userToken: String, idProduct: Int, stockItem: StockItemConfiguration, dataCallback: DataCallback<StockItem>){
+        ApiClient.getInstance(urlBase).apiService.updateStock(userToken, idProduct, stockItem).enqueue(object : Callback<StockItem> {
             override fun onResponse(call: Call<StockItem>, response: Response<StockItem>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }

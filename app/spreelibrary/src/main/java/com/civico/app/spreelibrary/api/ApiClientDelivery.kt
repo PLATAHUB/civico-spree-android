@@ -11,8 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 object ApiClientDelivery {
 
-    //private val BASE_API_URL:String = "https://www.civico.com/api/v1/"
-    private val BASE_API_URL:String = "https://beta.civico.com/api/v1/"
+    private val BASE_API_URL:String = "https://www.civico.com/api/v1/"
+    //private val BASE_API_URL:String = "https://beta.civico.com/api/v1/"
 
     val apiService: ApiService
 

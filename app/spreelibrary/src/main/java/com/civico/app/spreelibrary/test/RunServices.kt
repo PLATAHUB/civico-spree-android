@@ -23,10 +23,10 @@ class RunServices {
             // orderServices()
             //updateTracking()
             //shipmentIsReady()
-             orderIsShipped()
+            // orderIsShipped()
         }
 
-        private fun orderServices() {
+     /*   private fun orderServices() {
             OrderServices.getSortedNewOrders(myToken, 1, object : DataCallback<OrderResponse> {
                 override fun onResponse(code: Int, data: OrderResponse) {
                     println(data)
@@ -118,7 +118,7 @@ class RunServices {
                     }
                 })
         }
-
+*/
     }
 }
 

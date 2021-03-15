@@ -14,8 +14,8 @@ import retrofit2.Response
  */
 object TaxonServices {
 
-    fun getTaxons(userToken:String, taxonId:Int=1, dataCallback: DataCallback<TaxonResponse> ){
-        ApiClient.apiService.getTaxonomies(userToken, taxonId).enqueue(object : Callback<TaxonResponse>{
+    fun getTaxons(urlBase:String, userToken:String, taxonId:Int=1, dataCallback: DataCallback<TaxonResponse> ){
+        ApiClient.getInstance(urlBase).apiService.getTaxonomies(userToken, taxonId).enqueue(object : Callback<TaxonResponse>{
             override fun onResponse(call: Call<TaxonResponse>, response: Response<TaxonResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -25,8 +25,8 @@ object TaxonServices {
         })
     }
 
-    fun getTaxon(userToken:String, taxonsId:Int=1, taxonId:Int=1, dataCallback: DataCallback<Taxon> ){
-        ApiClient.apiService.getTaxonomie(userToken, taxonsId, taxonId).enqueue(object : Callback<Taxon> {
+    fun getTaxon(urlBase:String, userToken:String, taxonsId:Int=1, taxonId:Int=1, dataCallback: DataCallback<Taxon> ){
+        ApiClient.getInstance(urlBase).apiService.getTaxonomie(userToken, taxonsId, taxonId).enqueue(object : Callback<Taxon> {
             override fun onResponse(call: Call<Taxon>, response: Response<Taxon>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -36,8 +36,8 @@ object TaxonServices {
         })
     }
 
-    fun getTaxonCategory(perPage:Int=50, page:Int=1, withoutChildren:Boolean=true, nameCount:String, userToken:String, dataCallback: DataCallback<Taxons>){
-        ApiClient.apiService.getTaxonsCategory(perPage, page, withoutChildren, nameCount, userToken).enqueue(object : Callback<Taxons> {
+    fun getTaxonCategory(urlBase:String, perPage:Int=50, page:Int=1, withoutChildren:Boolean=true, nameCount:String, userToken:String, dataCallback: DataCallback<Taxons>){
+        ApiClient.getInstance(urlBase).apiService.getTaxonsCategory(perPage, page, withoutChildren, nameCount, userToken).enqueue(object : Callback<Taxons> {
             override fun onResponse(call: Call<Taxons>, response: Response<Taxons>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }

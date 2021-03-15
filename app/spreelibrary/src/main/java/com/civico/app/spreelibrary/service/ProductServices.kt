@@ -17,8 +17,8 @@ import retrofit2.Response
 
 object ProductServices {
 
-    fun getProducts(userToken:String, page:Int=1, perPage:Int=20,  dataCallback: DataCallback<ProductResponse> ){
-        ApiClient.apiService.getProducts(userToken, page, perPage).enqueue(object : Callback<ProductResponse>{
+    fun getProducts(urlBase:String, userToken:String, page:Int=1, perPage:Int=20,  dataCallback: DataCallback<ProductResponse> ){
+        ApiClient.getInstance(urlBase).apiService.getProducts(userToken, page, perPage).enqueue(object : Callback<ProductResponse>{
             override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -29,8 +29,8 @@ object ProductServices {
         })
     }
 
-    fun getProductsForVendor(userToken:String, idVendor:String, page:Int=1, perPage:Int=20,  dataCallback: DataCallback<ProductResponse> ){
-        ApiClient.apiService.getProductsForVendor(userToken, idVendor, page, perPage).enqueue(object : Callback<ProductResponse>{
+    fun getProductsForVendor(urlBase:String, userToken:String, idVendor:String, page:Int=1, perPage:Int=20,  dataCallback: DataCallback<ProductResponse> ){
+        ApiClient.getInstance(urlBase).apiService.getProductsForVendor(userToken, idVendor, page, perPage).enqueue(object : Callback<ProductResponse>{
             override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -44,9 +44,9 @@ object ProductServices {
     /**
      * Filters: keywords, taxon, price, offer. mapOf(filter to "valor" )
      */
-    fun searchProducts(userToken:String, page:Int=1, filters:Map<String, String>, dataCallback: DataCallback<ProductResponse>){
+    fun searchProducts(urlBase:String, userToken:String, page:Int=1, filters:Map<String, String>, dataCallback: DataCallback<ProductResponse>){
 
-        ApiClient.apiService.searchProducts(userToken, filters, page).enqueue(object : Callback<ProductResponse> {
+        ApiClient.getInstance(urlBase).apiService.searchProducts(userToken, filters, page).enqueue(object : Callback<ProductResponse> {
             override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -58,11 +58,11 @@ object ProductServices {
 
     }
 
-    fun getProduct(userToken:String, productIdOrSlug:String, dataCallback: DataCallback<Product> ){
+    fun getProduct(urlBase:String, userToken:String, productIdOrSlug:String, dataCallback: DataCallback<Product> ){
 
         //productIdOrSlug = "camiseta-de-millos-2022"
 
-        ApiClient.apiService.getProduct(userToken, productIdOrSlug).enqueue(object : Callback<Product> {
+        ApiClient.getInstance(urlBase).apiService.getProduct(userToken, productIdOrSlug).enqueue(object : Callback<Product> {
             override fun onResponse(call: Call<Product>, response: Response<Product>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -73,8 +73,8 @@ object ProductServices {
         })
     }
 
-    fun getProductImages(userToken:String, productIdOrSlug:String, dataCallback: DataCallback<List<Image>> ){
-        ApiClient.apiService.getProductImages(userToken, productIdOrSlug).enqueue(object : Callback<List<Image>> {
+    fun getProductImages(urlBase:String, userToken:String, productIdOrSlug:String, dataCallback: DataCallback<List<Image>> ){
+        ApiClient.getInstance(urlBase).apiService.getProductImages(userToken, productIdOrSlug).enqueue(object : Callback<List<Image>> {
             override fun onResponse(call: Call<List<Image>>, response: Response<List<Image>>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -85,8 +85,8 @@ object ProductServices {
         })
     }
 
-    fun getProductImage(userToken:String, productIdOrSlug:String, idImage:Int, dataCallback: DataCallback<Image> ){
-        ApiClient.apiService.getProductImage(userToken, productIdOrSlug, idImage).enqueue(object : Callback<Image> {
+    fun getProductImage(urlBase:String, userToken:String, productIdOrSlug:String, idImage:Int, dataCallback: DataCallback<Image> ){
+        ApiClient.getInstance(urlBase).apiService.getProductImage(userToken, productIdOrSlug, idImage).enqueue(object : Callback<Image> {
             override fun onResponse(call: Call<Image>, response: Response<Image>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -97,9 +97,9 @@ object ProductServices {
         })
     }
 
-    fun getAllProducts(userToken:String, dataCallback: DataCallback<ProductResponse>){
+    fun getAllProducts(urlBase:String, userToken:String, dataCallback: DataCallback<ProductResponse>){
 
-        ApiClient.apiService.getAllProducts(userToken).enqueue(object : Callback<ProductResponse> {
+        ApiClient.getInstance(urlBase).apiService.getAllProducts(userToken).enqueue(object : Callback<ProductResponse> {
             override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -111,8 +111,8 @@ object ProductServices {
 
     }
 
-    fun addProduct(userToken: String, product : ProductConfiguration, dataCallback: DataCallback<Product>){
-        ApiClient.apiService.addProduct(userToken, product).enqueue(object : Callback<Product> {
+    fun addProduct(urlBase:String, userToken: String, product : ProductConfiguration, dataCallback: DataCallback<Product>){
+        ApiClient.getInstance(urlBase).apiService.addProduct(userToken, product).enqueue(object : Callback<Product> {
             override fun onResponse(call: Call<Product>, response: Response<Product>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -123,8 +123,8 @@ object ProductServices {
         })
     }
 
-    fun updateProduct(userToken: String, idProduct: Int, product : ProductConfiguration, dataCallback: DataCallback<Product>){
-        ApiClient.apiService.updateProduct(userToken, idProduct, product).enqueue(object : Callback<Product> {
+    fun updateProduct(urlBase:String, userToken: String, idProduct: Int, product : ProductConfiguration, dataCallback: DataCallback<Product>){
+        ApiClient.getInstance(urlBase).apiService.updateProduct(userToken, idProduct, product).enqueue(object : Callback<Product> {
             override fun onResponse(call: Call<Product>, response: Response<Product>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -136,8 +136,8 @@ object ProductServices {
     }
 
 
-    fun addProductImage(userToken: String,  idProduct : Int, image : MultipartBody, dataCallback: DataCallback<Image>){
-        ApiClient.apiService.addProductImage(userToken,  idProduct, image).enqueue(object : Callback<Image> {
+    fun addProductImage(urlBase:String, userToken: String,  idProduct : Int, image : MultipartBody, dataCallback: DataCallback<Image>){
+        ApiClient.getInstance(urlBase).apiService.addProductImage(userToken,  idProduct, image).enqueue(object : Callback<Image> {
             override fun onResponse(call: Call<Image>, response: Response<Image>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -148,8 +148,8 @@ object ProductServices {
         })
     }
 
-    fun updateProductImage(userToken: String,  idProduct : Int, idImage : Int, image : MultipartBody, dataCallback: DataCallback<Image>){
-        ApiClient.apiService.updateProductImage(userToken,  idProduct, idImage, image).enqueue(object : Callback<Image> {
+    fun updateProductImage(urlBase:String, userToken: String,  idProduct : Int, idImage : Int, image : MultipartBody, dataCallback: DataCallback<Image>){
+        ApiClient.getInstance(urlBase).apiService.updateProductImage(userToken,  idProduct, idImage, image).enqueue(object : Callback<Image> {
             override fun onResponse(call: Call<Image>, response: Response<Image>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -160,8 +160,8 @@ object ProductServices {
         })
     }
 
-    fun deleteProductImage(userToken: String,  idProduct : Int, idImage : Int, dataCallback: DataCallbackDelete<Any?>){
-        ApiClient.apiService.deletProductImage(userToken,  idProduct, idImage).enqueue(object : Callback<Any?> {
+    fun deleteProductImage(urlBase:String, userToken: String,  idProduct : Int, idImage : Int, dataCallback: DataCallbackDelete<Any?>){
+        ApiClient.getInstance(urlBase).apiService.deletProductImage(userToken,  idProduct, idImage).enqueue(object : Callback<Any?> {
             override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                 System.out.println("imprimiendo respuesta " + response.headers() + " imprimiendo status " + response.headers().get("Status"))
                 var status : String = response.headers().get("Status").toString()
@@ -174,8 +174,8 @@ object ProductServices {
         })
     }
 
-    fun deleteProduct(userToken: String,  idProduct : Int, dataCallback: DataCallbackDelete<Any?>){
-        ApiClient.apiService.deletProduct(userToken,  idProduct,).enqueue(object : Callback<Any?> {
+    fun deleteProduct(urlBase:String, userToken: String,  idProduct : Int, dataCallback: DataCallbackDelete<Any?>){
+        ApiClient.getInstance(urlBase).apiService.deletProduct(userToken,  idProduct,).enqueue(object : Callback<Any?> {
             override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                 System.out.println("imprimiendo respuesta " + response.headers() + " imprimiendo status " + response.headers().get("Status"))
                 var status : String = response.headers().get("Status").toString()

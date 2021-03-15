@@ -18,8 +18,8 @@ import retrofit2.Response
  */
 object OrderServices {
 
-    fun getOrders(userToken: String, page: Int = 1, dataCallback: DataCallback<OrderResponse>) {
-        ApiClient.apiService.getOrders(userToken, page).enqueue(object : Callback<OrderResponse> {
+    fun getOrders(urlBase:String, userToken: String, page: Int = 1, dataCallback: DataCallback<OrderResponse>) {
+        ApiClient.getInstance(urlBase).apiService.getOrders(userToken, page).enqueue(object : Callback<OrderResponse> {
             override fun onResponse(call: Call<OrderResponse>, response: Response<OrderResponse>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -30,8 +30,8 @@ object OrderServices {
         })
     }
 
-    fun getOrder(numberOrder: String, tokenOrder: String, dataCallback: DataCallback<Order>) {
-        ApiClient.apiService.getOrder(numberOrder, tokenOrder).enqueue(object : Callback<Order> {
+    fun getOrder(urlBase:String, numberOrder: String, tokenOrder: String, dataCallback: DataCallback<Order>) {
+        ApiClient.getInstance(urlBase).apiService.getOrder(numberOrder, tokenOrder).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -42,8 +42,8 @@ object OrderServices {
         })
     }
 
-    fun getUserOrder(userToken: String, numberOrder: String, dataCallback: DataCallback<Order>) {
-        ApiClient.apiService.getUserOrder(numberOrder, userToken).enqueue(object : Callback<Order> {
+    fun getUserOrder(urlBase:String, userToken: String, numberOrder: String, dataCallback: DataCallback<Order>) {
+        ApiClient.getInstance(urlBase).apiService.getUserOrder(numberOrder, userToken).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -55,11 +55,12 @@ object OrderServices {
     }
 
     fun createOrder(
+        urlBase:String,
         userToken: String,
         orderWrapper: OrderWrapper,
         dataCallback: DataCallback<Order>
     ) {
-        ApiClient.apiService.createOrder(userToken, orderWrapper).enqueue(object : Callback<Order> {
+        ApiClient.getInstance(urlBase).apiService.createOrder(userToken, orderWrapper).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -71,12 +72,13 @@ object OrderServices {
     }
 
     fun addToCart(
+        urlBase:String,
         userToken: String,
         orderNumber: String,
         lineItemWrapper: LineItemWrapper,
         dataCallback: DataCallback<Order>
     ) {
-        ApiClient.apiService.addToCart(orderNumber, userToken, lineItemWrapper)
+        ApiClient.getInstance(urlBase).apiService.addToCart(orderNumber, userToken, lineItemWrapper)
             .enqueue(object : Callback<Order> {
                 override fun onResponse(call: Call<Order>, response: Response<Order>) {
                     Utils.executeCorrectResponse(response, dataCallback)
@@ -89,13 +91,14 @@ object OrderServices {
     }
 
     fun editCartProduct(
+        urlBase:String,
         userToken: String,
         orderNumber: String,
         idItemLine: Int,
         lineItemWrapper: LineItemWrapper,
         dataCallback: DataCallback<Order>
     ) {
-        ApiClient.apiService.editCartProduct(orderNumber, idItemLine, userToken, lineItemWrapper)
+        ApiClient.getInstance(urlBase).apiService.editCartProduct(orderNumber, idItemLine, userToken, lineItemWrapper)
             .enqueue(object : Callback<Order> {
                 override fun onResponse(call: Call<Order>, response: Response<Order>) {
                     Utils.executeCorrectResponse(response, dataCallback)
@@ -108,12 +111,13 @@ object OrderServices {
     }
 
     fun removeCartProduct(
+        urlBase:String,
         userToken: String,
         orderNumber: String,
         idItemLine: Int,
         dataCallback: DataCallback<Order>
     ) {
-        ApiClient.apiService.removeCartProduct(orderNumber, idItemLine, userToken)
+        ApiClient.getInstance(urlBase).apiService.removeCartProduct(orderNumber, idItemLine, userToken)
             .enqueue(object : Callback<Order> {
                 override fun onResponse(call: Call<Order>, response: Response<Order>) {
                     Utils.executeCorrectResponse(response, dataCallback)
@@ -125,8 +129,8 @@ object OrderServices {
             })
     }
 
-    fun emptyCart(userToken: String, orderNumber: String, dataCallback: DataCallback<Order>) {
-        ApiClient.apiService.emptyCart(orderNumber, userToken).enqueue(object : Callback<Order> {
+    fun emptyCart(urlBase:String, userToken: String, orderNumber: String, dataCallback: DataCallback<Order>) {
+        ApiClient.getInstance(urlBase).apiService.emptyCart(orderNumber, userToken).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -138,12 +142,13 @@ object OrderServices {
     }
 
     fun applyCouponCode(
+        urlBase:String,
         userToken: String,
         orderNumber: String,
         coupon: Coupon,
         dataCallback: DataCallback<CouponResponse>
     ) {
-        ApiClient.apiService.applyCouponCode(userToken, orderNumber, coupon)
+        ApiClient.getInstance(urlBase).apiService.applyCouponCode(userToken, orderNumber, coupon)
             .enqueue(object : Callback<CouponResponse> {
                 override fun onResponse(
                     call: Call<CouponResponse>,
@@ -159,12 +164,13 @@ object OrderServices {
     }
 
     fun removeCouponCode(
+        urlBase:String,
         userToken: String,
         orderNumber: String,
         coupon: Coupon,
         dataCallback: DataCallback<CouponResponse>
     ) {
-        ApiClient.apiService.removeCouponCode(userToken, orderNumber, coupon)
+        ApiClient.getInstance(urlBase).apiService.removeCouponCode(userToken, orderNumber, coupon)
             .enqueue(object : Callback<CouponResponse> {
                 override fun onResponse(
                     call: Call<CouponResponse>,
@@ -180,11 +186,12 @@ object OrderServices {
     }
 
     fun updateTracking(
+        urlBase:String,
         userToken: String,
         orderWrapper: OrderWrapper,
         dataCallback: DataCallback<Order>
     ) {
-        ApiClient.apiService.createOrder(userToken, orderWrapper).enqueue(object : Callback<Order> {
+        ApiClient.getInstance(urlBase).apiService.createOrder(userToken, orderWrapper).enqueue(object : Callback<Order> {
             override fun onResponse(call: Call<Order>, response: Response<Order>) {
                 Utils.executeCorrectResponse(response, dataCallback)
             }
@@ -195,8 +202,8 @@ object OrderServices {
         })
     }
 
-    fun approveOrder(orderNumber: String, userToken: String, dataCallback: DataCallback<Order>) {
-        ApiClient.apiService.approveOrder(orderNumber = orderNumber, userToken = userToken)
+    fun approveOrder(urlBase:String, orderNumber: String, userToken: String, dataCallback: DataCallback<Order>) {
+        ApiClient.getInstance(urlBase).apiService.approveOrder(orderNumber = orderNumber, userToken = userToken)
             .enqueue(object : Callback<Order> {
                 override fun onResponse(call: Call<Order>, response: Response<Order>) {
                     Utils.executeCorrectResponse(response, dataCallback)
@@ -209,11 +216,12 @@ object OrderServices {
     }
 
     fun shipmentIsReady(
+        urlBase:String,
         id_Envio: String,
         userToken: String,
         dataCallback: DataCallback<Shipment>
     ) {
-        ApiClient.apiService.shipmentIsReady(idEnvio = id_Envio, userToken = userToken)
+        ApiClient.getInstance(urlBase).apiService.shipmentIsReady(idEnvio = id_Envio, userToken = userToken)
             .enqueue(object : Callback<Shipment> {
                 override fun onResponse(call: Call<Shipment>, response: Response<Shipment>) {
                     Utils.executeCorrectResponse(response, dataCallback)
@@ -226,11 +234,12 @@ object OrderServices {
     }
 
     fun shipmentIsShipped(
+        urlBase:String,
         id_Envio: String,
         userToken: String,
         dataCallback: DataCallback<Shipment>
     ) {
-        ApiClient.apiService.shipmentIsShipped(idEnvio = id_Envio, userToken = userToken)
+        ApiClient.getInstance(urlBase).apiService.shipmentIsShipped(idEnvio = id_Envio, userToken = userToken)
             .enqueue(object : Callback<Shipment> {
                 override fun onResponse(call: Call<Shipment>, response: Response<Shipment>) {
                     Utils.executeCorrectResponse(response, dataCallback)
@@ -243,11 +252,12 @@ object OrderServices {
     }
 
     fun getSortedNewOrders(
+        urlBase:String,
         userToken: String,
         page: Int = 2,
         dataCallback: DataCallback<OrderResponse>
     ) {
-        ApiClient.apiService.getSortedNewOrders(userToken, page)
+        ApiClient.getInstance(urlBase).apiService.getSortedNewOrders(userToken, page)
             .enqueue(object : Callback<OrderResponse> {
                 override fun onResponse(
                     call: Call<OrderResponse>,
@@ -263,11 +273,12 @@ object OrderServices {
     }
 
     fun getSortedCompleteOrders(
+        urlBase:String,
         userToken: String,
         page: Int = 2,
         dataCallback: DataCallback<OrderResponse>
     ) {
-        ApiClient.apiService.getSortedCompleteOrders(userToken, page)
+        ApiClient.getInstance(urlBase).apiService.getSortedCompleteOrders(userToken, page)
             .enqueue(object : Callback<OrderResponse> {
                 override fun onResponse(
                     call: Call<OrderResponse>,
@@ -283,12 +294,13 @@ object OrderServices {
     }
 
     fun updateShipmentTracking(
+        urlBase:String,
         id_pedido: String,
         trackingNumber: String,
         userToken: String,
         dataCallback: DataCallback<Shipment>
     ) {
-        ApiClient.apiService.updateShipmentTracking(
+        ApiClient.getInstance(urlBase).apiService.updateShipmentTracking(
             idEnvio = id_pedido,
             idTracking = mapOf("shipment[tracking]" to trackingNumber),
             userToken = userToken
