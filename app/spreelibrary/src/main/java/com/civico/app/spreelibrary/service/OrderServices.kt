@@ -209,11 +209,28 @@ object OrderServices {
     }
 
     fun shipmentIsReady(
-        id_pedido: String,
+        id_Envio: String,
         userToken: String,
         dataCallback: DataCallback<Shipment>
     ) {
-        ApiClient.apiService.shipmentIsReady(idEnvio = id_pedido, userToken = userToken)
+        ApiClient.apiService.shipmentIsReady(idEnvio = id_Envio, userToken = userToken)
+            .enqueue(object : Callback<Shipment> {
+                override fun onResponse(call: Call<Shipment>, response: Response<Shipment>) {
+                    Utils.executeCorrectResponse(response, dataCallback)
+                }
+
+                override fun onFailure(call: Call<Shipment>, t: Throwable) {
+                    Utils.executeFailedResponse(t, dataCallback)
+                }
+            })
+    }
+
+    fun shipmentIsShipped(
+        id_Envio: String,
+        userToken: String,
+        dataCallback: DataCallback<Shipment>
+    ) {
+        ApiClient.apiService.shipmentIsShipped(idEnvio = id_Envio, userToken = userToken)
             .enqueue(object : Callback<Shipment> {
                 override fun onResponse(call: Call<Shipment>, response: Response<Shipment>) {
                     Utils.executeCorrectResponse(response, dataCallback)

@@ -214,6 +214,12 @@ interface ApiService {
         @Header("X-Spree-Token") userToken: String
     ): Call<Shipment>
 
+    @PUT("shipments/{id_envio}/ship")
+    fun shipmentIsShipped(
+        @Path("id_envio") idEnvio: String,
+        @Header("X-Spree-Token") userToken: String
+    ): Call<Shipment>
+
     @PUT("shipments/{id_envio}")
     fun updateShipmentTracking(
         @Path("id_envio") idEnvio: String,

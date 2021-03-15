@@ -2,6 +2,7 @@ package com.civico.app.spreelibrary.test
 
 import com.civico.app.spreelibrary.api.model.OrderResponse
 import com.civico.app.spreelibrary.model.orders.Order
+import com.civico.app.spreelibrary.model.orders.Shipment
 import com.civico.app.spreelibrary.service.DataCallback
 import com.civico.app.spreelibrary.service.OrderServices
 
@@ -12,23 +13,22 @@ import com.civico.app.spreelibrary.service.OrderServices
 class RunServices {
 
     companion object {
-        private const val myToken = "28de02065c3be69e01ea4fcda8f789248cb04b1094bac66d5b9548dd0b5c2c90"
+        private const val myToken =
+            "f9f8f8d0d17a11e3a72310700edcd1822efdee40f4b1e1b76339a29d7bbad17f"
 
         @JvmStatic
         fun main(args: Array<String>) {
-         //   getOnlyOneOrder()
-            approveOrder()
-            //  orderServices()
+            //   getOnlyOneOrder()
+            //approveOrder()
+            // orderServices()
+            //updateTracking()
+            //shipmentIsReady()
+             orderIsShipped()
         }
 
         private fun orderServices() {
-            val token = "7fb07faeb5fcf68152571afdba58284bdbf5fe30442fbcb55213949c155c9f11"
-            val anotherToken = "XD8oN79QOa5pdo9QnYzDww1603224099434"
-
-
-            //val token = "6e7bfb9ab9140b85e28e6587da0859dd980ce34e52f06fef7af5553f18915770"
-            OrderServices.getSortedCompleteOrders(myToken, 1, object : DataCallback<OrderResponse> {
-                override fun onResponse(data: OrderResponse) {
+            OrderServices.getSortedNewOrders(myToken, 1, object : DataCallback<OrderResponse> {
+                override fun onResponse(code: Int, data: OrderResponse) {
                     println(data)
                 }
 
@@ -37,38 +37,53 @@ class RunServices {
                     println(message)
                 }
             })
-            /**/
-
-            /*
-             */
-            /* OrderServices.updateShipmentTracking("H36947176950",
-                  "12345679",
-                  token,
-                  dataCallback = object : DataCallback<Shipment> {
-                      override fun onResponse(data: Shipment) {
-                          println(data)
-                          println(data)
-                      }
-
-                      override fun onError(code: Int, message: String) {
-                          println(code)
-                          println(message)
-                      }
-                  })*/
         }
 
-        private fun getOnlyOneOrder() {
-            OrderServices.getOrder(
-                "R021201443",
-                "43TFd2bkZDzZMsa7CaQh5Q1614703800342",
-                object : DataCallback<Order> {
-                    override fun onResponse(data: Order) {
+        private fun orderIsShipped() {
+            OrderServices.shipmentIsShipped(
+                "H61018233093",
+                myToken,
+                object : DataCallback<Shipment> {
+                    override fun onResponse(code: Int, data: Shipment) {
                         println(data)
                     }
 
                     override fun onError(code: Int, message: String) {
                         println(code)
                         println(message)
+                    }
+                })
+        }
+
+        private fun getOnlyOneOrder() {
+            OrderServices.getOrder(
+                "R394121672",
+                "0ut3DJFN97T-uTeKWFjzCA1615581190211",
+                object : DataCallback<Order> {
+                    override fun onResponse(code: Int, data: Order) {
+                        println(data)
+                    }
+
+                    override fun onError(code: Int, message: String) {
+                        println(code)
+                        println(message)
+                    }
+                })
+        }
+
+        private fun updateTracking() {
+            OrderServices.updateShipmentTracking(
+                "H61018233093",
+                "12345679",
+                myToken,
+                dataCallback = object : DataCallback<Shipment> {
+                    override fun onError(code: Int, message: String) {
+                        println(code)
+                        println(message)
+                    }
+
+                    override fun onResponse(code: Int, data: Shipment) {
+                        println(data)
                     }
                 })
         }
@@ -78,16 +93,32 @@ class RunServices {
                 "R021201443",
                 myToken,
                 dataCallback = object : DataCallback<Order> {
-                    override fun onResponse(data: Order) {
-                        println(data)
-                    }
-
                     override fun onError(code: Int, message: String) {
                         println(code)
                         println(message)
                     }
+
+                    override fun onResponse(code: Int, data: Order) {
+                        println(data)
+                    }
                 })
         }
+
+        private fun shipmentIsReady() {
+            OrderServices.shipmentIsReady("H61018233093",
+                myToken,
+                dataCallback = object : DataCallback<Shipment> {
+                    override fun onError(code: Int, message: String) {
+                        println(code)
+                        println(message)
+                    }
+
+                    override fun onResponse(code: Int, data: Shipment) {
+                        println(data)
+                    }
+                })
+        }
+
     }
 }
 
