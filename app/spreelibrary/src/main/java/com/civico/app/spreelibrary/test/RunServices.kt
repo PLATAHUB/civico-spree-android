@@ -1,10 +1,12 @@
 package com.civico.app.spreelibrary.test
 
 import com.civico.app.spreelibrary.api.model.OrderResponse
+import com.civico.app.spreelibrary.api.model.ProductResponse
 import com.civico.app.spreelibrary.model.orders.Order
 import com.civico.app.spreelibrary.model.orders.Shipment
 import com.civico.app.spreelibrary.service.DataCallback
 import com.civico.app.spreelibrary.service.OrderServices
+import com.civico.app.spreelibrary.service.ProductServices
 
 /**
  *
@@ -18,6 +20,7 @@ class RunServices {
 
         @JvmStatic
         fun main(args: Array<String>) {
+            getProduct();
             //   getOnlyOneOrder()
             //approveOrder()
             // orderServices()
@@ -119,6 +122,20 @@ class RunServices {
                 })
         }
 */
+
+        private fun getProduct() {
+            ProductServices.getProducts("https://cmkpbeta.civico.com/bogota/productos/api/v1/",
+                "7fb07faeb5fcf68152571afdba58284bdbf5fe30442fbcb55213949c155c9f11",
+                dataCallback = object : DataCallback<ProductResponse> {
+                    override fun onResponse(code: Int, data: ProductResponse) {
+                        println(code)
+                        println(data)                    }
+
+                    override fun onError(code: Int, message: String) {
+                        println(String)
+                    }
+                })
+        }
     }
 }
 
