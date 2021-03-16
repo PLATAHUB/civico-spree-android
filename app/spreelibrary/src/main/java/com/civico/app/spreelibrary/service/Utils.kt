@@ -11,15 +11,23 @@ import retrofit2.Response
 object Utils {
 
     fun <T> executeCorrectResponse(response: Response<T>, dataCallback: DataCallback<T>){
-        if (response.isSuccessful) {
-            response.body()?.let { dataCallback.onResponse(response.code(), it) }
-            return
+        try {
+            if (response.isSuccessful) {
+                response.body()?.let { dataCallback.onResponse(response.code(), it) }
+                return
+            }
+            val message: ErrorResponse = Gson().fromJson(response.errorBody()!!.charStream(), ErrorResponse::class.java)
+            dataCallback.onError(response.code(), message.error)
+        }catch (e:Exception){
+            dataCallback.onError(500, "Error recuperando la información del servidor")
         }
-        val message: ErrorResponse = Gson().fromJson(response.errorBody()!!.charStream(), ErrorResponse::class.java)
-        dataCallback.onError(response.code(), message.error)
     }
 
     fun <T> executeFailedResponse(t: Throwable, dataCallback: DataCallback<T>){
-        dataCallback.onError(0, t.message.toString())
+        try{
+            dataCallback.onError(0, t.message.toString())
+        }catch (e:Exception){
+            dataCallback.onError(500, "Error recuperando la información del servidor")
+        }
     }
 }

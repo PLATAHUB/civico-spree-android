@@ -9,12 +9,12 @@ Si queremos obtener todo el objeto de la orden dado su número y el token del us
 
 En Kotlin:
 
-        OrderServices.getOrder("R118199495", "XD8oN79QOa5pdo9QnYzDww1603224099434", object : DataCallback<Order>{
-            override fun onResponse(code:Int, data: Order) {
+        OrderServices.getOrder(urlBase, "R118199495", "XD8oN79QOa5pdo9QnYzDww1603224099434", object : DataCallback<Order>{
+            override fun onResponse(code:Int, data:Order) {
                 println(data)
             }
 
-            override fun onError(code: Int, message: String) {
+            override fun onError(code:Int, message:String) {
                 println(code)
                 println(message)
             }
@@ -22,9 +22,9 @@ En Kotlin:
                
 En Java:
 
-        OrderServices.INSTANCE.getOrder("R118199495", "XD8oN79QOa5pdo9QnYzDww1603224099434", new DataCallback<Order>() {
+        OrderServices.INSTANCE.getOrder(urlBase, "R118199495", "XD8oN79QOa5pdo9QnYzDww1603224099434", new DataCallback<Order>() {
             @Override
-            public void onResponse(int, code, Order order) {
+            public void onResponse(int code, Order order) {
                 
             }
 
