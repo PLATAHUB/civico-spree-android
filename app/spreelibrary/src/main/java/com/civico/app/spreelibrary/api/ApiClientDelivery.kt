@@ -5,19 +5,16 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ApiClientDelivery {
+class ApiClientDelivery private constructor(url: String) {
 
-    //private val BASE_API_URL:String = "https://www.civico.com/api/v1/"
-    private val BASE_API_URL:String = "https://beta.civico.com/api/v1/"
-
-    val apiService: ApiService
+    var apiService: ApiService
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
-            .client(makeOkHttpClient())
-            .baseUrl(BASE_API_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+                //.client(makeOkHttpClient())
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
         apiService = retrofit.create(ApiService::class.java)
     }
 
@@ -27,9 +24,15 @@ object ApiClientDelivery {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         return OkHttpClient.Builder()
-            /*.addInterceptor(AuthorizationInterceptor(token))*/
-            .addInterceptor(logging)
-            .build()
+                /*.addInterceptor(AuthorizationInterceptor(token))*/.addInterceptor(logging)
+                .build()
     }
 
+    companion object {
+        @Volatile
+        private var INSTANCE: ApiClientDelivery? = null
+
+        @Synchronized
+        fun getInstance(param: String): ApiClientDelivery = INSTANCE ?: ApiClientDelivery(param).also { INSTANCE = it }
+    }
 }

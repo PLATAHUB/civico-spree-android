@@ -34,8 +34,8 @@ object DeliverysServices {
         })
     }*/
 
-    @JvmStatic fun addDelivery(city: String, idClient: String, userToken: String, deliveryInformation: DeliveryInformation, dataCallback: DataCallback<DeliveryInformation>)  {
-        ApiClientDelivery.apiService.addDelivery(city, idClient, userToken, deliveryInformation).enqueue(object : Callback<DeliveryInformation> {
+    @JvmStatic fun addDelivery(urlBase:String, city: String, idClient: String, userToken: String, deliveryInformation: DeliveryInformation, dataCallback: DataCallback<DeliveryInformation>)  {
+        ApiClientDelivery.getInstance(urlBase).apiService.addDelivery(city, idClient, userToken, deliveryInformation).enqueue(object : Callback<DeliveryInformation> {
             override fun onResponse(
                 call: Call<DeliveryInformation>,
                 response: Response<DeliveryInformation>
@@ -50,8 +50,8 @@ object DeliverysServices {
         })
     }
 
-    @JvmStatic fun getDelivery(city: String, idClient: String, userToken: String, dataCallback: DataCallback<DeliveryConfiguration>)  {
-        ApiClientDelivery.apiService.getDelivery(city, idClient, userToken).enqueue(object : Callback<DeliveryConfiguration> {
+    @JvmStatic fun getDelivery(urlBase:String, city: String, idClient: String, userToken: String, dataCallback: DataCallback<DeliveryConfiguration>)  {
+        ApiClientDelivery.getInstance(urlBase).apiService.getDelivery(city, idClient, userToken).enqueue(object : Callback<DeliveryConfiguration> {
             override fun onResponse(
                 call: Call<DeliveryConfiguration>,
                 response: Response<DeliveryConfiguration>
