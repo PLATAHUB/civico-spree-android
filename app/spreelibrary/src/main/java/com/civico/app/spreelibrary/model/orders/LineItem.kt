@@ -22,7 +22,7 @@ class LineItem: Serializable {
     var variant: ProductMaster? = null
 
     @SerializedName("adjustments")
-    var adjustments: List<String> = ArrayList()
+    var adjustments: List<Adjustment>? = ArrayList()
 
     @SerializedName("single_display_amount")
     var singleDisplayAmount: String? = null

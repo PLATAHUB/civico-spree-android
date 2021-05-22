@@ -112,7 +112,7 @@ class Order : Serializable{
     var shipAddress:Address? = null
 
     @SerializedName("line_items")
-    var lineItems:List<LineItem> = ArrayList()
+    var lineItems:List<LineItem>? = ArrayList()
 
     @SerializedName("payments")
     var payments:List<Payment> = ArrayList()

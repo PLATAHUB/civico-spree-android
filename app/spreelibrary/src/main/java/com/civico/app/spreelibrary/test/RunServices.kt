@@ -17,12 +17,13 @@ class RunServices {
     companion object {
 
         val url = "https://tienda.civico.com/bogota/productos/api/v1/"
-
         @JvmStatic
         fun main(args: Array<String>) {
             //val token = "7fb07faeb5fcf68152571afdba58284bdbf5fe30442fbcb55213949c155c9f11"
-            val token = "6e7bfb9ab9140b85e28e6587da0859dd980ce34e52f06fef7af5553f18915770"
+            //val token = "6e7bfb9ab9140b85e28e6587da0859dd980ce34e52f06fef7af5553f18915770"
+            val token = "01c03e7fef1413665cc0d2f8684761706166fd73de8126db23f33c88c1a1b010"
             //orderServices(token)
+            getUserOrder(token);
 
             /*val filters = mapOf("keywords" to "medias" )
 
@@ -51,7 +52,7 @@ class RunServices {
 
             })*/
 
-            val review = ReviewWrapper()
+  /*          val review = ReviewWrapper()
             val reviewObj = Review(2, "Prueba libreria", "Producto regular", "Pepito", true)
             review.review = reviewObj
 
@@ -64,7 +65,7 @@ class RunServices {
                     println(message)
                 }
             })
-
+*/
         }
 
         private fun orderServices(userToken:String){
@@ -89,6 +90,21 @@ class RunServices {
                     println(message)
                 }
             })
+        }
+
+        private fun getUserOrder(userToken:String){
+            OrderServices.getUserOrder(url, userToken, "R146569625", object : DataCallback<Order>{
+                override fun onResponse(code:Int, data: Order) {
+                    println(data)
+                    println(data.total)
+                }
+
+                override fun onError(code: Int, message: String) {
+                    println(code)
+                    println(message)
+                }
+            })
+
         }
     }
 
