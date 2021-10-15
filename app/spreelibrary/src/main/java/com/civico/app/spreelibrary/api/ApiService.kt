@@ -24,21 +24,30 @@ import retrofit2.http.*
 interface ApiService {
 
     @GET("products")
-    fun getAllProducts(@Header("X-Spree-Token") userToken: String):Call<ProductResponse>
+    fun getAllProducts(@Header("X-Spree-Token") userToken: String): Call<ProductResponse>
 
     @GET("products")
-    fun getProducts(@Header("X-Spree-Token") userToken: String, @Query("page") page: Int, @Query("per_page") perPage: Int):Call<ProductResponse>
+    fun getProducts(
+        @Header("X-Spree-Token") userToken: String,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int
+    ): Call<ProductResponse>
 
     @GET("products")
     fun getProductsForVendor(
         @Header("X-Spree-Token") userToken: String,
         @Query("vendor") vendor: String,
         @Query("page") page: Int,
-        @Query("per_page") perPage: Int):Call<ProductResponse>
+        @Query("per_page") perPage: Int
+    ): Call<ProductResponse>
 
 
     @GET("products")
-    fun searchProducts(@Header("X-Spree-Token") userToken: String, @QueryMap(encoded = true) filters: Map<String, String>, @Query("page") page: Int):Call<ProductResponse>
+    fun searchProducts(
+        @Header("X-Spree-Token") userToken: String,
+        @QueryMap(encoded = true) filters: Map<String, String>,
+        @Query("page") page: Int
+    ): Call<ProductResponse>
 
     @GET("products/{productIdOrSlug}")
     fun getProduct(
@@ -60,22 +69,45 @@ interface ApiService {
     ): Call<Image>
 
     @PUT("products/{id_product}")
-    fun updateProduct(@Header("X-Spree-Token") userToken: String,@Path("id_product") idProduct: Int, @Body product: ProductConfiguration): Call<Product>
+    fun updateProduct(
+        @Header("X-Spree-Token") userToken: String,
+        @Path("id_product") idProduct: Int,
+        @Body product: ProductConfiguration
+    ): Call<Product>
 
     @POST("products")
-    fun addProduct(@Header("X-Spree-Token") userToken: String, @Body product: ProductConfiguration): Call<Product>
+    fun addProduct(
+        @Header("X-Spree-Token") userToken: String,
+        @Body product: ProductConfiguration
+    ): Call<Product>
 
     @POST("products/{id_product}/images")
-    fun addProductImage(@Header("X-Spree-Token") userToken: String, @Path("id_product") idProduct: Int, @Body image: MultipartBody): Call<Image>
+    fun addProductImage(
+        @Header("X-Spree-Token") userToken: String,
+        @Path("id_product") idProduct: Int,
+        @Body image: MultipartBody
+    ): Call<Image>
 
     @PUT("products/{id_product}/images/{id_image}")
-    fun updateProductImage(@Header("X-Spree-Token") userToken: String,  @Path("id_product") idProduct: Int,  @Path("id_image") idImage: Int, @Body image: MultipartBody): Call<Image>
+    fun updateProductImage(
+        @Header("X-Spree-Token") userToken: String,
+        @Path("id_product") idProduct: Int,
+        @Path("id_image") idImage: Int,
+        @Body image: MultipartBody
+    ): Call<Image>
 
     @DELETE("products/{id_product}/images/{id_image}")
-    fun deletProductImage(@Header("X-Spree-Token") userToken: String,  @Path("id_product") idProduct: Int,  @Path("id_image") idImage: Int): Call<Any?>
+    fun deletProductImage(
+        @Header("X-Spree-Token") userToken: String,
+        @Path("id_product") idProduct: Int,
+        @Path("id_image") idImage: Int
+    ): Call<Any?>
 
     @DELETE("products/{id_product}")
-    fun deletProduct(@Header("X-Spree-Token") userToken: String,  @Path("id_product") idProduct: Int): Call<Any?>
+    fun deletProduct(
+        @Header("X-Spree-Token") userToken: String,
+        @Path("id_product") idProduct: Int
+    ): Call<Any?>
 
     @POST("orders")
     fun createOrder(
@@ -165,7 +197,13 @@ interface ApiService {
     ): Call<Taxon>
 
     @GET("taxons")
-    fun getTaxonsCategory(@Query("per_page") perPage: Int, @Query("page") page: Int, @Query("without_children") withoutChildren: Boolean, @Query("q[name_cont]") nameCont: String,  @Query("token") authToken: String):Call<Taxons>
+    fun getTaxonsCategory(
+        @Query("per_page") perPage: Int,
+        @Query("page") page: Int,
+        @Query("without_children") withoutChildren: Boolean,
+        @Query("q[name_cont]") nameCont: String,
+        @Query("token") authToken: String
+    ): Call<Taxons>
 
     @PUT("orders/{orderNumber}/apply_coupon_code")
     fun applyCouponCode(
@@ -175,13 +213,26 @@ interface ApiService {
     ): Call<CouponResponse>
 
     @PUT("orders/{orderNumber}/remove_coupon_code")
-    fun removeCouponCode(@Header("X-Spree-Token") userToken: String, @Path("orderNumber") orderNumber: String, @Body coupon: Coupon):Call<CouponResponse>
+    fun removeCouponCode(
+        @Header("X-Spree-Token") userToken: String,
+        @Path("orderNumber") orderNumber: String,
+        @Body coupon: Coupon
+    ): Call<CouponResponse>
 
     @PUT("business/customers/{id-cliente}/update-delivery-information")
-    fun addDelivery(@Header("city") city: String, @Path("id-cliente") idCliente: String,  @Query("auth_token") authToken: String, @Body deliveryInformation: DeliveryInformation):Call<DeliveryInformation>
+    fun addDelivery(
+        @Header("city") city: String,
+        @Path("id-cliente") idCliente: String,
+        @Query("auth_token") authToken: String,
+        @Body deliveryInformation: DeliveryInformation
+    ): Call<DeliveryInformation>
 
     @GET("business/customers/{id-cliente}/delivery-information")
-    fun getDelivery(@Header("city") city: String, @Path("id-cliente") idCliente: String,  @Query("auth_token") authToken: String):Call<DeliveryConfiguration>
+    fun getDelivery(
+        @Header("city") city: String,
+        @Path("id-cliente") idCliente: String,
+        @Query("auth_token") authToken: String
+    ): Call<DeliveryConfiguration>
 
     @PUT("orders/{id_pedido}/approve")
     fun approveOrder(
@@ -229,8 +280,10 @@ interface ApiService {
     ): Call<Shipment>
 
     @PUT("stock_items/{id_product}")
-    fun updateStock(@Header("X-Spree-Token") userToken: String,
-                    @Path("id_product") idProduct: Int,
-                    @Body stockItem: StockItemConfiguration):Call<StockItem>
+    fun updateStock(
+        @Header("X-Spree-Token") userToken: String,
+        @Path("id_product") idProduct: Int,
+        @Body stockItem: StockItemConfiguration
+    ): Call<StockItem>
 
 }
